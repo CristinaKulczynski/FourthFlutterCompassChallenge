@@ -18,7 +18,13 @@ class ListaDeTarefas extends StatelessWidget {
         itemBuilder: ((context, index) {
           var tarefa = listaDeTarefas[index];
           return ListTile(
-            title: Text(tarefa.titulo),
+            title: Text(
+              tarefa.titulo,
+              style: TextStyle(
+                  // Se a tarefa estiver concluida ficara riscada
+                  decoration:
+                      tarefa.isConcluida! ? TextDecoration.lineThrough : null),
+            ),
             trailing: Checkbox(
               value: tarefa.isConcluida,
               onChanged: (value) {
