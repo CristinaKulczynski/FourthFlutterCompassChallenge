@@ -5,13 +5,11 @@ import 'package:todolist/models/tarefa.dart';
 class AdicionarATarefa extends StatelessWidget {
   const AdicionarATarefa({
     Key? key,
-    required this.tituloController,
   }) : super(key: key);
-
-  final TextEditingController tituloController;
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController tituloController = TextEditingController();
     return Container(
       padding: EdgeInsets.only(
         // Consulta de mídia da visualização.
@@ -37,20 +35,27 @@ class AdicionarATarefa extends StatelessWidget {
             ),
           ),
           // Apenas sai do ShowModalBottomSheet
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('cancelar'),
-          ),
-          // Cria variável tarefa, chama o tarefas_event para adicionar na lista
-          ElevatedButton(
-            onPressed: () {
-              var tarefa = Tarefa(
-                titulo: tituloController.text,
-              );
-              // Metodo para criar adicionar tarefa
-              context.read<TarefasBloc>().add(AdicionarTarefa(tarefa: tarefa));
-            },
-            child: const Text('Salvar'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('cancelar'),
+              ),
+              // Cria variável tarefa, chama o tarefas_event para adicionar na lista
+              ElevatedButton(
+                onPressed: () {
+                  var tarefa = Tarefa(
+                    titulo: tituloController.text,
+                  );
+                  // Metodo para criar adicionar tarefa
+                  context
+                      .read<TarefasBloc>()
+                      .add(AdicionarTarefa(tarefa: tarefa));
+                },
+                child: const Text('Salvar'),
+              ),
+            ],
           ),
         ]),
       ),
