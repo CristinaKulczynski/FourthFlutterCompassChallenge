@@ -4,8 +4,8 @@ import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/tela_principal_todo_list.dart';
 
 void main() async {
-  //Inicializando ligações dos widgets
-
+  //Inicializando ligações dos widgets e
+  //Armazenando os dados do app utilizando a extensão do bloc - HydratedBloc.
   final armazenamento = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
   WidgetsFlutterBinding.ensureInitialized();
