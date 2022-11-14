@@ -44,7 +44,7 @@ class _TelaTODOListState extends State<TelaTODOList> {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => _adicionarTarefa(context),
                   icon: const Icon(Icons.add),
                 ),
               ],
