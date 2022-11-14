@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/models/tarefa.dart';
 
 class ListaDeTarefas extends StatelessWidget {
@@ -15,13 +16,19 @@ class ListaDeTarefas extends StatelessWidget {
       child: ListView.builder(
         itemCount: listaDeTarefas.length,
         itemBuilder: ((context, index) {
-          var Tarefa = listaDeTarefas[index];
+          var tarefa = listaDeTarefas[index];
           return ListTile(
-            title: Text(Tarefa.titulo),
+            title: Text(tarefa.titulo),
             trailing: Checkbox(
-              value: Tarefa.isConcluida,
-              onChanged: ((value) {}),
+              value: tarefa.isConcluida,
+              onChanged: (value) {
+                context
+                    .read<TarefasBloc>()
+                    .add(AtualizarTarefa(tarefa: tarefa));
+              },
             ),
+            onLongPress: () =>
+                context.read<TarefasBloc>().add(ExcluirTarefa(tarefa: tarefa)),
           );
         }),
       ),
