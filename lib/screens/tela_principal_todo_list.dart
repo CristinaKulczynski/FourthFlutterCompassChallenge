@@ -1,67 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/models/tarefa.dart';
+import 'package:todolist/widgets/lista_de_tarefas.dart';
+
+import '../blocs/exportacao_do_bloc.dart';
 
 class TelaTODOList extends StatelessWidget {
   TelaTODOList({Key? key}) : super(key: key);
 
-  // Lista temporária para teste
-  List<Tarefa> listaDeTarefas = [
-    Tarefa(titulo: 'Tarefa1'),
-    Tarefa(titulo: 'Tarefa2'),
-    Tarefa(titulo: 'Tarefa3'),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Padding(
-            padding: EdgeInsets.only(left: 15),
-            child: Text(
-              'TODO List',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-            ),
-          ],
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Center(
-              child: Chip(
-                label: Text(
-                  'Tasks:',
+    return BlocBuilder<TarefasBloc, TarefasState>(
+      builder: (context, state) {
+        List<Tarefa> listaDeTarefas = state.listaDeTodasTarefas;
+        return Scaffold(
+            appBar: AppBar(
+              title: const Padding(
+                padding: EdgeInsets.only(left: 15),
+                child: Text(
+                  'TODO List',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.add),
+                ),
+              ],
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: listaDeTarefas.length,
-                itemBuilder: ((context, index) {
-                  var Tarefa = listaDeTarefas[index];
-                  return ListTile(
-                    title: Text(Tarefa.titulo),
-                    trailing: Checkbox(
-                      value: Tarefa.isConcluida,
-                      onChanged: ((value) {}),
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Center(
+                  child: Chip(
+                    label: Text(
+                      'Tasks:',
                     ),
-                  );
-                }),
-              ),
+                  ),
+                ),
+                ListaDeTarefas(listaDeTarefas: listaDeTarefas),
+              ],
             ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Add Task',
-          child: const Icon(Icons.add),
-        ));
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {},
+              tooltip: 'Add Task',
+              child: const Icon(Icons.add),
+            ));
+      },
+    );
   }
 }

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/screens/tela_todo_list.dart';
+import 'package:todolist/blocs/exportacao_do_bloc.dart';
+import 'package:todolist/models/tarefa.dart';
+import 'package:todolist/screens/tela_principal_todo_list.dart';
 
 void main() {
-  runApp(const MyApp());
+  // ignore: deprecated_member_use
+  BlocOverrides.runZoned(
+    () => runApp(const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,11 +15,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TODO List',
-      debugShowCheckedModeBanner: false,
-      /*Tirar debug da tela*/
-      home: TelaTODOList(),
+    return BlocProvider(
+      create: (context) => TarefasBloc()
+        ..add(AdicionarTarefa(
+          tarefa: Tarefa(titulo: 'Comer abacate'),
+        )),
+      child: MaterialApp(
+        title: 'TODO List',
+        debugShowCheckedModeBanner: false,
+        /*Tirar debug da tela*/
+        home: TelaTODOList(),
+      ),
     );
   }
 }
