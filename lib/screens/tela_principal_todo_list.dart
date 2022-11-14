@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/models/tarefa.dart';
 import 'package:todolist/widgets/lista_de_tarefas.dart';
-
+import 'package:todolist/screens/adicionar_tarefa.dart';
 import '../blocs/exportacao_do_bloc.dart';
 
+// ignore: must_be_immutable
 class TelaTODOList extends StatelessWidget {
   TelaTODOList({Key? key}) : super(key: key);
+
+  TextEditingController tituloController = TextEditingController();
+
+  void _adicionarTarefa(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        child: AdicionarATarefa(tituloController: tituloController),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +56,7 @@ class TelaTODOList extends StatelessWidget {
               ],
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () => _adicionarTarefa(context),
               tooltip: 'Add Task',
               child: const Icon(Icons.add),
             ));
