@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/models/tarefa.dart';
+import 'package:todolist/screens/menu_lateral.dart';
 import 'package:todolist/widgets/lista_de_tarefas.dart';
 import 'package:todolist/screens/adicionar_a_tarefa.dart';
 import '../blocs/exportacao_do_bloc.dart';
@@ -49,13 +50,15 @@ class _TelaTODOListState extends State<TelaTODOList> {
                 ),
               ],
             ),
+            drawer: const MenuLateral(),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Center(
+                Center(
                   child: Chip(
                     label: Text(
-                      'Tasks:',
+                      // Mostra quantas tarefas temos
+                      '${state.listaDeTodasTarefas.length} Tasks',
                     ),
                   ),
                 ),
