@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/models/tarefa.dart';
+import 'package:todolist/services/gerador_de_numeros.dart';
 
 class AdicionarATarefa extends StatelessWidget {
   const AdicionarATarefa({
@@ -47,6 +48,7 @@ class AdicionarATarefa extends StatelessWidget {
                 onPressed: () {
                   var tarefa = Tarefa(
                     titulo: tituloController.text,
+                    id: geradorId(),
                   );
                   // Metodo para criar adicionar tarefa
                   context
