@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/tela_principal_todo_list.dart';
 
-void main() {
+void main() async {
+  //Inicializando ligações dos widgets
+
+  final armazenamento = await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
+  WidgetsFlutterBinding.ensureInitialized();
   HydratedBlocOverrides.runZoned(
     () => runApp(const MyApp()),
+    storage: armazenamento,
   );
 }
 
