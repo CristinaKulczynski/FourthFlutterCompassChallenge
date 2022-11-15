@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todolist/models/tarefa.dart';
+import 'package:todolist/screens/editar_a_tarefa.dart';
 import 'package:todolist/widgets/botao_pop_up.dart';
 
 import '../blocs/exportacao_do_bloc.dart';
@@ -17,6 +18,20 @@ class TarefaTile extends StatelessWidget {
     tarefa.isDeletada!
         ? contet.read<TarefasBloc>().add(ExcluirTarefa(tarefa: tarefa))
         : contet.read<TarefasBloc>().add(RemoveTarefa(tarefa: tarefa));
+  }
+
+  void _editarATarefa(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => SingleChildScrollView(
+        child: Container(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: EditarATarefa(todasTarefas: tarefa),
+        ),
+      ),
+    );
   }
 
   @override
@@ -72,6 +87,13 @@ class TarefaTile extends StatelessWidget {
                 favoritaOuNao: () => context.read<TarefasBloc>().add(
                       FavoritasOnOff(tarefa: tarefa),
                     ),
+                editar: () {
+                  Navigator.of(context).pop();
+                  _editarATarefa(context);
+                },
+                restaurar: () => context
+                    .read<TarefasBloc>()
+                    .add(RestaurarTarefa(tarefa: tarefa)),
               ),
             ],
           ),

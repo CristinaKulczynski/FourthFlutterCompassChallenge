@@ -6,12 +6,14 @@ class BotaoPopUp extends StatelessWidget {
   final VoidCallback cancelarOuDeletar;
   final VoidCallback favoritaOuNao;
   final VoidCallback editar;
+  final VoidCallback restaurar;
 
   const BotaoPopUp(
       {Key? key,
       required this.cancelarOuDeletar,
       required this.tarefa,
       required this.editar,
+      required this.restaurar,
       required this.favoritaOuNao})
       : super(key: key);
 
@@ -56,7 +58,7 @@ class BotaoPopUp extends StatelessWidget {
                       icon: const Icon(Icons.restore),
                       label: const Text('Restaurar'),
                     ),
-                    onTap: () {},
+                    onTap: restaurar,
                   ),
                   PopupMenuItem(
                     child: TextButton.icon(

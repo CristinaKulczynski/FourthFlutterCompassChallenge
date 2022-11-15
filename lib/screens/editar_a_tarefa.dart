@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/models/tarefa.dart';
-import 'package:todolist/services/gerador_de_numeros.dart';
 
 class EditarATarefa extends StatelessWidget {
   final Tarefa todasTarefas;
@@ -69,8 +68,7 @@ class EditarATarefa extends StatelessWidget {
                   );
                   // Metodo para criar adicionar tarefa
                   context.read<TarefasBloc>().add(EditarTarefa(
-                        todasTarefas: todasTarefas, novaTarefa: tarefaEditada
-                      ));
+                      todasTarefas: todasTarefas, novaTarefa: tarefaEditada));
                   Navigator.pop(context);
                 },
                 child: const Text('Salvar'),

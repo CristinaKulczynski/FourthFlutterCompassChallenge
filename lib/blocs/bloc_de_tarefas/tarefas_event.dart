@@ -29,6 +29,16 @@ class AtualizarTarefa extends TarefasEvent {
   List<Object> get props => [tarefa];
 }
 
+class RestaurarTarefa extends TarefasEvent {
+  final Tarefa tarefa;
+  const RestaurarTarefa({
+    required this.tarefa,
+  });
+
+  @override
+  List<Object> get props => [tarefa];
+}
+
 class RemoveTarefa extends TarefasEvent {
   final Tarefa tarefa;
   const RemoveTarefa({
