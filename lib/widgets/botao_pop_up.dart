@@ -5,11 +5,13 @@ class BotaoPopUp extends StatelessWidget {
   final Tarefa tarefa;
   final VoidCallback cancelarOuDeletar;
   final VoidCallback favoritaOuNao;
+  final VoidCallback editar;
 
   const BotaoPopUp(
       {Key? key,
       required this.cancelarOuDeletar,
       required this.tarefa,
+      required this.editar,
       required this.favoritaOuNao})
       : super(key: key);
 
@@ -20,11 +22,11 @@ class BotaoPopUp extends StatelessWidget {
             ? ((context) => [
                   PopupMenuItem(
                     child: TextButton.icon(
-                      onPressed: null,
+                      onPressed: editar,
                       icon: const Icon(Icons.edit),
                       label: const Text('Editar'),
                     ),
-                    onTap: () {},
+                    onTap: null,
                   ),
                   PopupMenuItem(
                     child: TextButton.icon(
@@ -36,7 +38,7 @@ class BotaoPopUp extends StatelessWidget {
                           ? const Text('Adicionar Favorito')
                           : const Text('Remover do Favorito'),
                     ),
-                    onTap: () {},
+                    onTap: favoritaOuNao,
                   ),
                   PopupMenuItem(
                     child: TextButton.icon(
