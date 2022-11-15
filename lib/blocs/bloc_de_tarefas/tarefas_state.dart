@@ -3,20 +3,20 @@ part of 'tarefas_bloc.dart';
 class TarefasState extends Equatable {
   final List<Tarefa> listaDeTodasTarefas;
 
-  final List<Tarefa> tarefasExcluidas;
+  final List<Tarefa> tarefasRemovidas;
 
   const TarefasState({
     this.listaDeTodasTarefas = const <Tarefa>[],
-    this.tarefasExcluidas = const <Tarefa>[],
+    this.tarefasRemovidas = const <Tarefa>[],
   });
 
   @override
-  List<Object> get props => [listaDeTodasTarefas, tarefasExcluidas];
+  List<Object> get props => [listaDeTodasTarefas, tarefasRemovidas];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'listaDeTodasTarefas': listaDeTodasTarefas.map((x) => x.toMap()).toList(),
-      'tarefasExcluidas': tarefasExcluidas.map((x) => x.toMap()).toList(),
+      'tarefasRemovidas': tarefasRemovidas.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -27,8 +27,8 @@ class TarefasState extends Equatable {
           (x) => Tarefa.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      tarefasExcluidas: List<Tarefa>.from(
-        (map['tarefasExcluidas'] as List<int>).map<Tarefa>(
+      tarefasRemovidas: List<Tarefa>.from(
+        (map['tarefasRemovidas'] as List<int>).map<Tarefa>(
           (x) => Tarefa.fromMap(x as Map<String, dynamic>),
         ),
       ),
