@@ -23,7 +23,7 @@ class MenuLateral extends StatelessWidget {
             BlocBuilder<TarefasBloc, TarefasState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed(
+                  onTap: () => Navigator.of(context).pushReplacementNamed(
                     TelaTODOList.id,
                   ),
                   child: ListTile(
@@ -36,7 +36,7 @@ class MenuLateral extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             GestureDetector(
-              onTap: () => Navigator.of(context).pushNamed(
+              onTap: () => Navigator.of(context).pushReplacementNamed(
                 Reciclar.id,
               ),
               child: const ListTile(
