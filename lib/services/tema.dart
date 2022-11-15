@@ -29,7 +29,7 @@ class Temas {
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           foregroundColor:
-              MaterialStateProperty.all(Color.fromARGB(255, 2, 2, 2)),
+              MaterialStateProperty.all(const Color.fromARGB(255, 2, 2, 2)),
         ),
       ),
       textTheme: const TextTheme(

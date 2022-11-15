@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class Tarefa extends Equatable {
   final String titulo;
   final String id;
