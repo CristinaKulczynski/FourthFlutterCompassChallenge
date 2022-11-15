@@ -12,14 +12,30 @@ class ListaDeTarefas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: listaDeTarefas.length,
-        itemBuilder: ((context, index) {
-          var tarefa = listaDeTarefas[index];
-          return TarefaTile(tarefa: tarefa);
-        }),
-      ),
+    return ExpansionPanelList.radio(
+      children: listaDeTarefas
+          .map((tarefa) => ExpansionPanelRadio(
+                value: tarefa.id,
+                headerBuilder: (context, isOpen) => TarefaTile(
+                  tarefa: tarefa,
+                ),
+                body: const SelectableText.rich(TextSpan(children: [
+                  TextSpan(
+                      text: 'Descrição: ',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ])),
+              ))
+          .toList(),
     );
   }
 }
+
+// Expanded(
+//       child: ListView.builder(
+//         itemCount: listaDeTarefas.length,
+//         itemBuilder: ((context, index) {
+//           var tarefa = listaDeTarefas[index];
+//           return TarefaTile(tarefa: tarefa);
+//         }),
+//       ),
+//     );

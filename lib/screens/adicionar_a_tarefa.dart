@@ -11,6 +11,7 @@ class AdicionarATarefa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController tituloController = TextEditingController();
+    TextEditingController descricaoController = TextEditingController();
     return Container(
       padding: EdgeInsets.only(
         // Consulta de mídia da visualização.
@@ -35,6 +36,17 @@ class AdicionarATarefa extends StatelessWidget {
               border: OutlineInputBorder(),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8, bottom: 8),
+            child: TextField(
+              autofocus: true,
+              controller: descricaoController,
+              decoration: const InputDecoration(
+                label: Text('Descrição'),
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
           // Apenas sai do ShowModalBottomSheet
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -48,6 +60,7 @@ class AdicionarATarefa extends StatelessWidget {
                 onPressed: () {
                   var tarefa = Tarefa(
                     titulo: tituloController.text,
+                    descricao: descricaoController.text,
                     id: geradorId(),
                   );
                   // Metodo para criar adicionar tarefa
