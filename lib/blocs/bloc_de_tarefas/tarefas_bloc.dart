@@ -1,9 +1,7 @@
-import 'dart:html';
-
 import 'package:equatable/equatable.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/models/tarefa.dart';
-import 'package:todolist/screens/editar_a_tarefa.dart';
+import 'package:todolist/widgets/lista_de_tarefas.dart';
 part 'tarefas_event.dart';
 part 'tarefas_state.dart';
 
@@ -18,6 +16,7 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
     on<RemoveTarefa>(_onRemoveTarefa);
     on<FavoritasOnOff>(_onFavoritasOnOff);
     on<EditarTarefa>(_onEditarTarefa);
+    on<RestaurarTarefa>(_onRestaurarTarefa);
   }
 
   // Recebe o evento e o emissor atuais
@@ -28,10 +27,8 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
         //   ..add(event.tarefa),
         listaTarefasPendentes: List.from(state.listaTarefasPendentes)
           ..add(event.tarefa),
-        listaTarefasFavoritas: List.from(state.listaTarefasFavoritas)
-          ..add(event.tarefa),
-        listaTarefasConcluidas: List.from(state.listaTarefasConcluidas)
-          ..add(event.tarefa),
+        listaTarefasFavoritas: state.listaTarefasFavoritas,
+        listaTarefasConcluidas: state.listaTarefasConcluidas,
 
         // O estado das tarefas removidas deve ser mostrado
         // Para que quando uma tarefa for adicionada
@@ -57,21 +54,37 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
     // tarefa.isConcluida == false
     //     ? listaDeTodasTarefas.insert(index, tarefa.copyWith(isConcluida: true))
     //     : listaDeTodasTarefas.insert(index, tarefa.copyWith(isConcluida: false));
-    tarefa.isConcluida == false
-        ? {
-            listaTarefasPendentes = List.from(listaTarefasPendentes)
-              ..remove(tarefa),
-            listaTarefasConcluidas = List.from(listaTarefasPendentes)
-              ..insert(0, tarefa.copyWith(isConcluida: true))
-          }
-        : {
-            listaTarefasConcluidas = List.from(listaTarefasConcluidas)
-              ..remove(tarefa),
-            listaTarefasConcluidas = List.from(listaTarefasConcluidas)
-              ..remove(tarefa),
-            listaTarefasPendentes = List.from(listaTarefasPendentes)
-              ..insert(0, tarefa.copyWith(isConcluida: false)),
-          };
+    if (tarefa.isConcluida == false) {
+      if (tarefa.isFavorita == false) {
+        listaTarefasPendentes = List.from(listaTarefasPendentes)
+          ..remove(tarefa);
+        listaTarefasConcluidas.insert(0, tarefa.copyWith(isConcluida: true));
+      } else {
+        var taskIndex = listaTarefasFavoritas.indexOf(tarefa);
+        listaTarefasPendentes = List.from(listaTarefasPendentes)
+          ..remove(tarefa);
+        listaTarefasConcluidas.insert(0, tarefa.copyWith(isConcluida: true));
+        listaTarefasFavoritas = List.from(listaTarefasFavoritas)
+          ..remove(tarefa)
+          ..insert(taskIndex, tarefa.copyWith(isConcluida: true));
+      }
+    } else {
+      if (tarefa.isFavorita == false) {
+        listaTarefasConcluidas = List.from(listaTarefasConcluidas)
+          ..remove(tarefa);
+        listaTarefasPendentes = List.from(listaTarefasPendentes)
+          ..insert(0, tarefa.copyWith(isConcluida: false));
+      } else {
+        var tarefaIndex = listaTarefasFavoritas.indexOf(tarefa);
+        listaTarefasConcluidas = List.from(listaTarefasConcluidas)
+          ..remove(tarefa);
+        listaTarefasPendentes = List.from(listaTarefasPendentes)
+          ..insert(0, tarefa.copyWith(isConcluida: false));
+        listaTarefasFavoritas = List.from(listaTarefasFavoritas)
+          ..remove(tarefa)
+          ..insert(tarefaIndex, tarefa.copyWith(isConcluida: false));
+      }
+    }
     //Emitindo nova tarefa
     // emit(TarefasState(
     //   listaDeTodasTarefas: listaDeTodasTarefas,
@@ -134,6 +147,21 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
           ..insert(tarefaIndex, event.tarefa.copyWith(isFavorita: false));
         listaTarefasFavoritas.remove(event.tarefa);
       }
+    } else {
+      if (event.tarefa.isFavorita == false) {
+        var tarefaIndex = listaTarefasConcluidas.indexOf(event.tarefa);
+        listaTarefasConcluidas = List.from(listaTarefasConcluidas)
+          ..remove(event.tarefa)
+          ..insert(tarefaIndex, event.tarefa.copyWith(isFavorita: true));
+        listaTarefasFavoritas.insert(
+            0, event.tarefa.copyWith(isFavorita: true));
+      } else {
+        var tarefaIndex = listaTarefasConcluidas.indexOf(event.tarefa);
+        listaTarefasConcluidas = List.from(listaTarefasConcluidas)
+          ..remove(event.tarefa)
+          ..insert(tarefaIndex, event.tarefa.copyWith(isFavorita: false));
+        listaTarefasFavoritas.remove(event.tarefa);
+      }
     }
     emit(TarefasState(
       listaTarefasPendentes: listaTarefasPendentes,
@@ -168,5 +196,25 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
       listaTarefasConcluidas: listaDeTarefasFavoritas,
       tarefasRemovidas: state.tarefasRemovidas,
     ));
+  }
+
+  void _onRestaurarTarefa(RestaurarTarefa event, Emitter<TarefasState> emit) {
+    final state = this.state;
+    emit(
+      TarefasState(
+        tarefasRemovidas: List.from(state.tarefasRemovidas)
+          ..remove(event.tarefa),
+        listaTarefasPendentes: List.from(state.listaTarefasPendentes)
+          ..insert(
+              0,
+              event.tarefa.copyWith(
+                isDeletada: false,
+                isConcluida: false,
+                isFavorita: false,
+              )),
+        listaTarefasConcluidas: state.listaTarefasConcluidas,
+        listaTarefasFavoritas: state.listaTarefasFavoritas,
+      ),
+    );
   }
 }
