@@ -19,21 +19,46 @@ class TarefaTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        tarefa.titulo,
-        style: TextStyle(
-            // Se a tarefa estiver concluida ficara riscada
-            decoration:
-                tarefa.isConcluida! ? TextDecoration.lineThrough : null),
-      ),
-      trailing: Checkbox(
-        value: tarefa.isConcluida,
-        onChanged: (value) {
-          context.read<TarefasBloc>().add(AtualizarTarefa(tarefa: tarefa));
-        },
-      ),
-      onLongPress: () => _excluirOuRemoverTarefa(context, tarefa),
+    return Row(
+      children: [
+        Row(
+          children: [
+            const Icon(Icons.star_outline),
+            Text(
+              tarefa.titulo,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  // Se a tarefa estiver concluida ficara riscada
+                  decoration:
+                      tarefa.isConcluida! ? TextDecoration.lineThrough : null),
+            ),
+          ],
+        ),
+        Checkbox(
+          value: tarefa.isConcluida,
+          onChanged: (value) {
+            context.read<TarefasBloc>().add(AtualizarTarefa(tarefa: tarefa));
+          },
+        ),
+      ],
     );
   }
 }
+
+// ListTile(
+//       title: Text(
+//         tarefa.titulo,
+//         overflow: TextOverflow.ellipsis,
+//         style: TextStyle(
+//             // Se a tarefa estiver concluida ficara riscada
+//             decoration:
+//                 tarefa.isConcluida! ? TextDecoration.lineThrough : null),
+//       ),
+//       trailing: Checkbox(
+//         value: tarefa.isConcluida,
+//         onChanged: (value) {
+//           context.read<TarefasBloc>().add(AtualizarTarefa(tarefa: tarefa));
+//         },
+//       ),
+//       onLongPress: () => _excluirOuRemoverTarefa(context, tarefa),
+//     );
