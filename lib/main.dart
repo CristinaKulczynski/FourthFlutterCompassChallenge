@@ -3,6 +3,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/tela_principal_todo_list.dart';
 import 'package:todolist/services/rotas_do_aplicativo.dart';
+import 'package:todolist/services/tema.dart';
 
 void main() async {
   //Inicializando ligações dos widgets
@@ -30,14 +31,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TarefasBloc(),
-      child: MaterialApp(
-        title: 'TODO List',
-        debugShowCheckedModeBanner: false,
-        /*Tirar debug da tela*/
-        home: const TelaTODOList(),
-        onGenerateRoute: rotasDoAplicativo.onGenerateRoute,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => TarefasBloc()),
+        BlocProvider(create: (context) => BotaoBloc())
+      ],
+      child: BlocBuilder<BotaoBloc, BotaoState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'TODO List',
+            debugShowCheckedModeBanner: false,
+            theme: state.botaoValor
+                ? Temas.temasAplicativo[Tema.lightTema]
+                : Temas.temasAplicativo[Tema.darkTema],
+            /*Tirar debug da tela*/
+            home: const TelaTODOList(),
+            onGenerateRoute: rotasDoAplicativo.onGenerateRoute,
+          );
+        },
       ),
     );
   }
