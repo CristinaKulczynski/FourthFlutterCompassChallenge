@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/menu_lateral.dart';
 import 'package:todolist/widgets/lista_de_tarefas.dart';
