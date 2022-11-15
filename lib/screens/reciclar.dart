@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:todolist/screens/menu_lateral.dart';
 import 'package:todolist/widgets/lista_de_tarefas.dart';
 
-class Lixeira extends StatelessWidget {
-  const Lixeira({super.key});
+class Reciclar extends StatelessWidget {
+  const Reciclar({super.key});
+
+  static const id = 'reciclar';
 
   @override
   Widget build(BuildContext context) {
