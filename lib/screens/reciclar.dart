@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/menu_lateral.dart';
 import 'package:todolist/widgets/lista_de_tarefas.dart';
 
@@ -9,39 +11,43 @@ class Reciclar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 15),
-          child: Text(
-            'Reciclar lixeira',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add),
-          ),
-        ],
-      ),
-      drawer: const MenuLateral(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Center(
-            child: Chip(
-              label: Text(
-                // Mostra quantas tarefas temos
-                ' Tasks',
+    return BlocBuilder<TarefasBloc, TarefasState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Padding(
+              padding: EdgeInsets.only(left: 15),
+              child: Text(
+                'Reciclar lixeira',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.add),
+              ),
+            ],
           ),
-          ListaDeTarefas(listaDeTarefas: []),
-        ],
-      ),
+          drawer: const MenuLateral(),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Chip(
+                  label: Text(
+                    // Mostra quantas tarefas temos
+                    ' ${state.tarefasRemovidas.length} Tarefas',
+                  ),
+                ),
+              ),
+              ListaDeTarefas(listaDeTarefas: state.tarefasRemovidas),
+            ],
+          ),
+        );
+      },
     );
   }
 }
