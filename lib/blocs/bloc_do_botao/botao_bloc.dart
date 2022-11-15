@@ -5,9 +5,16 @@ part 'botao_event.dart';
 part 'botao_state.dart';
 
 class BotaoBloc extends Bloc<BotaoEvent, BotaoState> {
-  BotaoBloc() : super(BotaoInitial()) {
+  BotaoBloc() : super(const BotaoInitial(botaoValor: false)) {
     on<BotaoEvent>((event, emit) {
-      // TODO: implement event handler
+      emit(
+        const BotaoState(botaoValor: true),
+      );
+    });
+    on<BotaoEvent>((event, emit) {
+      emit(
+        const BotaoState(botaoValor: false),
+      );
     });
   }
 }

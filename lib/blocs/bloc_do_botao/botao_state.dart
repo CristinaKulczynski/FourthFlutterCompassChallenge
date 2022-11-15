@@ -1,10 +1,14 @@
 part of 'botao_bloc.dart';
 
-abstract class BotaoState extends Equatable {
-  const BotaoState();
-  
+class BotaoState extends Equatable {
+  final bool botaoValor;
+
+  const BotaoState({required this.botaoValor});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [botaoValor];
 }
 
-class BotaoInitial extends BotaoState {}
+class BotaoInitial extends BotaoState {
+  const BotaoInitial({required super.botaoValor});
+}

@@ -52,7 +52,7 @@ class _TelaTODOListState extends State<TelaTODOList> {
                 ),
               ],
             ),
-            drawer: const MenuLateral(),
+            drawer: MenuLateral(),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'TODO List',
             debugShowCheckedModeBanner: false,
+            // Muda as cores do tema de acordo com o estado do botao switch
             theme: state.botaoValor
                 ? Temas.temasAplicativo[Tema.lightTema]
                 : Temas.temasAplicativo[Tema.darkTema],

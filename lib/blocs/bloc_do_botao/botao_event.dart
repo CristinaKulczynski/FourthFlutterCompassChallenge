@@ -6,3 +6,7 @@ abstract class BotaoEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class BotaoAtivadoEvent extends BotaoEvent {}
+
+class BotaoDesativadoEvent extends BotaoEvent {}

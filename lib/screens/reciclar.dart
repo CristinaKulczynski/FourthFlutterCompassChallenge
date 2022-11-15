@@ -30,7 +30,7 @@ class Reciclar extends StatelessWidget {
               ),
             ],
           ),
-          drawer: const MenuLateral(),
+          drawer: MenuLateral(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
