@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
+import 'package:todolist/screens/principal_todo_list.dart';
 import 'package:todolist/screens/tela_principal_todo_list.dart';
 import 'package:todolist/services/rotas_do_aplicativo.dart';
 import 'package:todolist/services/tema.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
                 ? Temas.temasAplicativo[Tema.lightTema]
                 : Temas.temasAplicativo[Tema.darkTema],
             /*Tirar debug da tela*/
-            home: const TelaTODOList(),
+            home: const PrincipalTodoList(),
             onGenerateRoute: rotasDoAplicativo.onGenerateRoute,
           );
         },

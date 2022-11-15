@@ -67,11 +67,11 @@ class _TelaTODOListState extends State<TelaTODOList> {
               ListaDeTarefas(listaDeTarefas: listaDeTarefas),
             ],
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => _adicionarTarefa(context),
-            tooltip: 'Adicione Tarefa',
-            child: const Icon(Icons.add),
-          ),
+          // floatingActionButton: FloatingActionButton(
+          //   onPressed: () => _adicionarTarefa(context),
+          //   tooltip: 'Adicione Tarefa',
+          //   child: const Icon(Icons.add),
+          // ),
         );
       },
     );

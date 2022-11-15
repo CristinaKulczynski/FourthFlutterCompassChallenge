@@ -55,6 +55,14 @@ class PrincipalTodoList extends StatelessWidget {
             icon: Icon(Icons.list),
             label: 'Pendente',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.done),
+            label: 'Completas',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favoritas',
+          ),
         ],
       ),
     );
