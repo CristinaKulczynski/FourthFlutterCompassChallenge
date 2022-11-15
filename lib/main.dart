@@ -32,11 +32,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TarefasBloc(),
-      child: const MaterialApp(
+      child: MaterialApp(
         title: 'TODO List',
         debugShowCheckedModeBanner: false,
         /*Tirar debug da tela*/
-        home: TelaTODOList(),
+        home: const TelaTODOList(),
         onGenerateRoute: rotasDoAplicativo.onGenerateRoute,
       ),
     );
