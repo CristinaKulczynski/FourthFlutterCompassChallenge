@@ -26,6 +26,7 @@ class _TelaTODOListState extends State<TelaTODOList> {
   void _adicionarTarefa(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (context) => SingleChildScrollView(
         child: Container(
           padding:
