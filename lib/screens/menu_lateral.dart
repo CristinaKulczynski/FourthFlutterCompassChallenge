@@ -52,12 +52,16 @@ class _MenuLateralState extends State<MenuLateral> {
                 trailing: Text('0'),
               ),
             ),
-            Switch(
-              value: switchValor,
-              onChanged: (novoValor) {
-                setState(() {
-                  switchValor = novoValor;
-                });
+            BlocBuilder<BotaoBloc, BotaoState>(
+              builder: (context, state) {
+                return Switch(
+                  value: state.botaoValor,
+                  onChanged: (novoValor) {
+                    novoValor
+                        ? context.read<BotaoBloc>().add(BotaoAtivadoEvent())
+                        : context.read<BotaoBloc>().add(BotaoDesativadoEvent());
+                  },
+                );
               },
             )
           ],
