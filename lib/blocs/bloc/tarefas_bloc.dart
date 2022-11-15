@@ -20,9 +20,12 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
   void _onAdicionarTarefa(AdicionarTarefa event, Emitter<TarefasState> emit) {
     final state = this.state;
     emit(TarefasState(
-      listaDeTodasTarefas: List.from(state.listaDeTodasTarefas)
-        ..add(event.tarefa),
-    ));
+        listaDeTodasTarefas: List.from(state.listaDeTodasTarefas)
+          ..add(event.tarefa),
+        // O estado das tarefas removidas deve ser mostrado
+        // Para que quando uma tarefa for adicionada
+        // A lista de tarefas removidas não seja apagada
+        tarefasRemovidas: state.tarefasRemovidas));
   }
 
   void _onAtualizarTarefa(AtualizarTarefa event, Emitter<TarefasState> emit) {
@@ -41,7 +44,10 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
         : listaDeTodasTarefas.insert(
             index, tarefa.copyWith(isConcluida: false));
     //Emitindo nova tarefa
-    emit(TarefasState(listaDeTodasTarefas: listaDeTodasTarefas));
+    emit(TarefasState(
+      listaDeTodasTarefas: listaDeTodasTarefas,
+      tarefasRemovidas: state.tarefasRemovidas,
+    ));
   }
 
   void _onRemoveTarefa(RemoveTarefa event, Emitter<TarefasState> emit) {
@@ -57,7 +63,8 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
   void _onExcluirTarefa(ExcluirTarefa event, Emitter<TarefasState> emit) {
     final state = this.state;
     emit(TarefasState(
-        listaDeTodasTarefas: List.from(state.listaDeTodasTarefas)
+        listaDeTodasTarefas: state.listaDeTodasTarefas,
+        tarefasRemovidas: List.from(state.tarefasRemovidas)
           ..remove(event.tarefa)));
   }
 
