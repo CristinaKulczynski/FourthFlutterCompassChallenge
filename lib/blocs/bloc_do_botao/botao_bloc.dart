@@ -1,6 +1,3 @@
-// ignore: depend_on_referenced_packages
-import 'dart:html';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 

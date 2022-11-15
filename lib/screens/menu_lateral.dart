@@ -3,6 +3,7 @@ import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/Reciclar.dart';
 import 'package:todolist/screens/tela_principal_todo_list.dart';
 
+// ignore: must_be_immutable
 class MenuLateral extends StatelessWidget {
   MenuLateral({super.key});
 
