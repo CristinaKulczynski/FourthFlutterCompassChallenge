@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/screens/adicionar_a_tarefa.dart';
+import 'package:todolist/screens/completas.dart';
+import 'package:todolist/screens/favoritos.dart';
 import 'package:todolist/screens/menu_lateral.dart';
 import 'package:todolist/screens/pendencias.dart';
 
-class TelaTODOList extends StatelessWidget {
-  const TelaTODOList({super.key});
-  static const id = 'principal_todo_list';
+// ignore: must_be_immutable
+class TelaTODOList extends StatefulWidget {
+  TelaTODOList({super.key});
+  static const id = 'tela_todo_list';
+
+  @override
+  State<TelaTODOList> createState() => _TelaTODOListState();
+}
+
+class _TelaTODOListState extends State<TelaTODOList> {
+  final List<Map<String, dynamic>> _descricao = [
+    {'Nome': const Pendencias(), 'titulo': 'Pendencias'},
+    {'Nome': const Favoritos(), 'titulo': 'Favoritas'},
+    {'Nome': const Completas(), 'titulo': 'Completas'},
+  ];
+
+  var _indexDaPagina = 0;
 
   void _adicionarTarefa(BuildContext context) {
     showModalBottomSheet(
@@ -24,11 +40,11 @@ class TelaTODOList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 15),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 15),
           child: Text(
-            'TODO List',
-            style: TextStyle(
+            _descricao[_indexDaPagina]['titulo'],
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -41,18 +57,24 @@ class TelaTODOList extends StatelessWidget {
         ],
       ),
       drawer: MenuLateral(),
-      body: const Pendencias(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _adicionarTarefa(context),
-        tooltip: 'Adicione Tarefa',
-        child: const Icon(Icons.add),
-      ),
+      body: _descricao[_indexDaPagina]['Nome'],
+      floatingActionButton: _indexDaPagina == 0
+          ? FloatingActionButton(
+              onPressed: () => _adicionarTarefa(context),
+              tooltip: 'Adicione Tarefa',
+              child: const Icon(Icons.add),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        onTap: (index) {},
+        currentIndex: _indexDaPagina,
+        onTap: (index) {
+          setState(() {
+            _indexDaPagina = index;
+          });
+        },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.incomplete_circle_sharp),
             label: 'Pendente',
           ),
           BottomNavigationBarItem(
