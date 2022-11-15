@@ -47,6 +47,16 @@ class PrincipalTodoList extends StatelessWidget {
         tooltip: 'Adicione Tarefa',
         child: const Icon(Icons.add),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        onTap: (index) {},
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Pendente',
+          ),
+        ],
+      ),
     );
   }
 }
