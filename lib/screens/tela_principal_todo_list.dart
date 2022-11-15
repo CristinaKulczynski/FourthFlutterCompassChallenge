@@ -16,18 +16,18 @@ class TelaTODOList extends StatefulWidget {
 }
 
 class _TelaTODOListState extends State<TelaTODOList> {
-  void _adicionarTarefa(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => SingleChildScrollView(
-        child: Container(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: const AdicionarATarefa(),
-        ),
-      ),
-    );
-  }
+  // void _adicionarTarefa(BuildContext context) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (context) => SingleChildScrollView(
+  //       child: Container(
+  //         padding:
+  //             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+  //         child: const AdicionarATarefa(),
+  //       ),
+  //     ),
+  //   );
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -35,43 +35,44 @@ class _TelaTODOListState extends State<TelaTODOList> {
       builder: (context, state) {
         List<Tarefa> listaDeTarefas = state.listaDeTodasTarefas;
         return Scaffold(
-            appBar: AppBar(
-              title: const Padding(
-                padding: EdgeInsets.only(left: 15),
-                child: Text(
-                  'TODO List',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+          appBar: AppBar(
+            title: const Padding(
+              padding: EdgeInsets.only(left: 15),
+              child: Text(
+                'TODO List',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            // actions: [
+            //   IconButton(
+            //     onPressed: () => _adicionarTarefa(context),
+            //     icon: const Icon(Icons.add),
+            //   ),
+            // ],
+          ),
+          drawer: MenuLateral(),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Chip(
+                  label: Text(
+                    // Mostra quantas tarefas temos
+                    '${state.listaDeTodasTarefas.length} Tasks',
                   ),
                 ),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () => _adicionarTarefa(context),
-                  icon: const Icon(Icons.add),
-                ),
-              ],
-            ),
-            drawer: MenuLateral(),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                  child: Chip(
-                    label: Text(
-                      // Mostra quantas tarefas temos
-                      '${state.listaDeTodasTarefas.length} Tasks',
-                    ),
-                  ),
-                ),
-                ListaDeTarefas(listaDeTarefas: listaDeTarefas),
-              ],
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () => _adicionarTarefa(context),
-              tooltip: 'Adicione Tarefa',
-              child: const Icon(Icons.add),
-            ));
+              ListaDeTarefas(listaDeTarefas: listaDeTarefas),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => _adicionarTarefa(context),
+            tooltip: 'Adicione Tarefa',
+            child: const Icon(Icons.add),
+          ),
+        );
       },
     );
   }

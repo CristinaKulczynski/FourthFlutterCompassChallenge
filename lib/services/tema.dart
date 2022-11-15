@@ -36,7 +36,7 @@ class Temas {
       ),
     ),
     Tema.lightTema: ThemeData(
-      brightness: Brightness.dark,
+      brightness: Brightness.light,
       primaryColor: Colors.black,
       primarySwatch: Colors.grey,
       backgroundColor: const Color(
@@ -59,7 +59,6 @@ class Temas {
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.green,
         unselectedItemColor: Colors.white,
       ),
     ),
