@@ -11,14 +11,14 @@ class Pendencias extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TarefasBloc, TarefasState>(
       builder: (context, state) {
-        List<Tarefa> listaDeTarefas = state.listaDeTodasTarefas;
+        List<Tarefa> listaDeTarefas = state.listaTarefasPendentes;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Chip(
                 label: Text(
-                  '${state.listaDeTodasTarefas.length} Tasks',
+                  '${listaDeTarefas.length} Pendente | Concluidas ${state.listaTarefasConcluidas.length}',
                 ),
               ),
             ),

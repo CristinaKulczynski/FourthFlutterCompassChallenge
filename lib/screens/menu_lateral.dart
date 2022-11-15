@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/Reciclar.dart';
-import 'package:todolist/screens/principal_todo_list.dart';
+import 'package:todolist/screens/tela_todo_list.dart';
 
 // ignore: must_be_immutable
 class MenuLateral extends StatelessWidget {
@@ -31,8 +31,9 @@ class MenuLateral extends StatelessWidget {
                   ),
                   child: ListTile(
                     leading: const Icon(Icons.folder_special),
-                    title: const Text('Reciclar'),
-                    trailing: Text('${state.listaDeTodasTarefas.length}'),
+                    title: const Text('Tarefas'),
+                    trailing: Text(
+                        '${state.listaTarefasPendentes.length} | ${state.listaTarefasConcluidas.length}'),
                   ),
                 );
               },
