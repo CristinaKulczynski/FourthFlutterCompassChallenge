@@ -11,6 +11,12 @@ class TarefaTile extends StatelessWidget {
 
   final Tarefa tarefa;
 
+  void _excluirOuRemoverTarefa(BuildContext contet, Tarefa tarefa) {
+    tarefa.isDeletada!
+        ? contet.read<TarefasBloc>().add(ExcluirTarefa(tarefa: tarefa))
+        : contet.read<TarefasBloc>().add(RemoveTarefa(tarefa: tarefa));
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -27,8 +33,7 @@ class TarefaTile extends StatelessWidget {
           context.read<TarefasBloc>().add(AtualizarTarefa(tarefa: tarefa));
         },
       ),
-      onLongPress: () =>
-          context.read<TarefasBloc>().add(ExcluirTarefa(tarefa: tarefa)),
+      onLongPress: () => _excluirOuRemoverTarefa(context, tarefa),
     );
   }
 }
