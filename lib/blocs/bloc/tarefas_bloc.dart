@@ -13,6 +13,7 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
     on<AdicionarTarefa>(_onAdicionarTarefa);
     on<AtualizarTarefa>(_onAtualizarTarefa);
     on<ExcluirTarefa>(_onExcluirTarefa);
+    on<RemoveTarefa>(_onRemoveTarefa);
   }
 
   // Recebe o evento e o emissor atuais
@@ -41,6 +42,16 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
             index, tarefa.copyWith(isConcluida: false));
     //Emitindo nova tarefa
     emit(TarefasState(listaDeTodasTarefas: listaDeTodasTarefas));
+  }
+
+  void _onRemoveTarefa(RemoveTarefa event, Emitter<TarefasState> emit) {
+    final state = this.state;
+    emit(TarefasState(
+      listaDeTodasTarefas: List.from(state.listaDeTodasTarefas)
+        ..remove(event.tarefa),
+      tarefasRemovidas: List.from(state.tarefasRemovidas)
+        ..add(event.tarefa.copyWith(isDeletada: true)),
+    ));
   }
 
   void _onExcluirTarefa(ExcluirTarefa event, Emitter<TarefasState> emit) {
