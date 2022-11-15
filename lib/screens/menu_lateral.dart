@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/Reciclar.dart';
 import 'package:todolist/screens/tela_principal_todo_list.dart';
 
@@ -19,15 +20,19 @@ class MenuLateral extends StatelessWidget {
               child: Text('Menu de opções',
                   style: Theme.of(context).textTheme.headline5),
             ),
-            GestureDetector(
-              onTap: () => Navigator.of(context).pushNamed(
-                TelaTODOList.id,
-              ),
-              child: const ListTile(
-                leading: Icon(Icons.folder_special),
-                title: Text('Reciclar'),
-                trailing: Text('0'),
-              ),
+            BlocBuilder<TarefasBloc, TarefasState>(
+              builder: (context, state) {
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).pushNamed(
+                    TelaTODOList.id,
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.folder_special),
+                    title: const Text('Reciclar'),
+                    trailing: Text('${state.listaDeTodasTarefas.length}'),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 10),
             GestureDetector(
