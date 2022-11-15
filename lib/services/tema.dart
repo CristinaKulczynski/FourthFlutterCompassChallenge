@@ -59,7 +59,7 @@ class Temas {
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.green,
         unselectedItemColor: Colors.white,
       ),
     ),
