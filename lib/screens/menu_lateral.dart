@@ -19,7 +19,7 @@ class MenuLateral extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 30),
-              color: Colors.grey,
+              color: Colors.pink,
               child: Text('Menu de opções',
                   style: Theme.of(context).textTheme.headline5),
             ),
