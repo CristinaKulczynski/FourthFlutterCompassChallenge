@@ -6,7 +6,6 @@ import 'package:todolist/widgets/botao_pop_up.dart';
 import '../blocs/exportacao_do_bloc.dart';
 
 class TarefaTile extends StatelessWidget {
-
   const TarefaTile({
     Key? key,
     required this.tarefa,
@@ -29,7 +28,9 @@ class TarefaTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.star_outline),
+              tarefa.isFavorita == false
+                  ? const Icon(Icons.star_outline)
+                  : const Icon(Icons.star),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +47,9 @@ class TarefaTile extends StatelessWidget {
                     ),
                     //Text(DateFormat().add_yMEd().format(DateTime.now())),
                     //Text(DateFormat('dd/MM/yyyy').format(DateTime.now())),
-                    Text(DateFormat().add_yMMMd().format(DateTime.parse(tarefa.data))),
+                    Text(DateFormat()
+                        .add_yMMMd()
+                        .format(DateTime.parse(tarefa.data))),
                   ],
                 ),
               ),
@@ -66,6 +69,9 @@ class TarefaTile extends StatelessWidget {
                 tarefa: tarefa,
                 cancelarOuDeletar: () =>
                     _excluirOuRemoverTarefa(context, tarefa),
+                favoritaOuNao: () => context.read<TarefasBloc>().add(
+                      FavoritasOnOff(tarefa: tarefa),
+                    ),
               ),
             ],
           ),

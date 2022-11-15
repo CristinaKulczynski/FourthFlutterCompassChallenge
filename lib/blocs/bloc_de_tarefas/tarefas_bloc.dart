@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:equatable/equatable.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/models/tarefa.dart';
+import 'package:todolist/screens/editar_a_tarefa.dart';
 part 'tarefas_event.dart';
 part 'tarefas_state.dart';
 
@@ -16,6 +17,7 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
     on<ExcluirTarefa>(_onExcluirTarefa);
     on<RemoveTarefa>(_onRemoveTarefa);
     on<FavoritasOnOff>(_onFavoritasOnOff);
+    on<EditarTarefa>(_onEditarTarefa);
   }
 
   // Recebe o evento e o emissor atuais
@@ -149,5 +151,22 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
   @override
   Map<String, dynamic>? toJson(TarefasState state) {
     return state.toMap();
+  }
+
+  void _onEditarTarefa(EditarTarefa event, Emitter<TarefasState> emit) {
+    final state = this.state;
+    List<Tarefa> listaDeTarefasFavoritas = state.listaTarefasFavoritas;
+    if (event.todasTarefas.isFavorita == true) {
+      listaDeTarefasFavoritas
+        ..remove(event.todasTarefas)
+        ..insert(0, event.novaTarefa);
+    }
+    emit(TarefasState(
+      listaTarefasPendentes: List.from(state.listaTarefasPendentes)
+        ..remove(event.todasTarefas)
+        ..insert(0, event.novaTarefa),
+      listaTarefasConcluidas: listaDeTarefasFavoritas,
+      tarefasRemovidas: state.tarefasRemovidas,
+    ));
   }
 }

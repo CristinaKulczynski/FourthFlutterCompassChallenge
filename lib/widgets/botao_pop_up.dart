@@ -4,9 +4,13 @@ import 'package:todolist/models/tarefa.dart';
 class BotaoPopUp extends StatelessWidget {
   final Tarefa tarefa;
   final VoidCallback cancelarOuDeletar;
+  final VoidCallback favoritaOuNao;
 
   const BotaoPopUp(
-      {Key? key, required this.cancelarOuDeletar, required this.tarefa})
+      {Key? key,
+      required this.cancelarOuDeletar,
+      required this.tarefa,
+      required this.favoritaOuNao})
       : super(key: key);
 
   @override
@@ -25,8 +29,12 @@ class BotaoPopUp extends StatelessWidget {
                   PopupMenuItem(
                     child: TextButton.icon(
                       onPressed: null,
-                      icon: const Icon(Icons.bookmark),
-                      label: const Text('Adicionar Favorito'),
+                      icon: tarefa.isFavorita == false
+                          ? const Icon(Icons.bookmark_add_outlined)
+                          : const Icon(Icons.bookmark_remove),
+                      label: tarefa.isFavorita == false
+                          ? const Text('Adicionar Favorito')
+                          : const Text('Remover do Favorito'),
                     ),
                     onTap: () {},
                   ),
