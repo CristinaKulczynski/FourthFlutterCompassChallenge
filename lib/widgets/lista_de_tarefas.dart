@@ -12,20 +12,30 @@ class ListaDeTarefas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionPanelList.radio(
-      children: listaDeTarefas
-          .map((tarefa) => ExpansionPanelRadio(
-                value: tarefa.id,
-                headerBuilder: (context, isOpen) => TarefaTile(
-                  tarefa: tarefa,
-                ),
-                body: const SelectableText.rich(TextSpan(children: [
-                  TextSpan(
-                      text: 'Descrição: ',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                ])),
-              ))
-          .toList(),
+    return SingleChildScrollView(
+      child: ExpansionPanelList.radio(
+        children: listaDeTarefas
+            .map((tarefa) => ExpansionPanelRadio(
+                  value: tarefa.id,
+                  headerBuilder: (context, isOpen) => TarefaTile(
+                    tarefa: tarefa,
+                  ),
+                  body: SelectableText.rich(
+                    TextSpan(children: [
+                      const TextSpan(
+                        text: 'Título: \n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(text: tarefa.titulo),
+                      const TextSpan(
+                        text: '\nDescrição: \n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ]),
+                  ),
+                ))
+            .toList(),
+      ),
     );
   }
 }
