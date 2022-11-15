@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todolist/models/tarefa.dart';
+import 'package:todolist/widgets/botao_pop_up.dart';
 
 import '../blocs/exportacao_do_bloc.dart';
 
 class TarefaTile extends StatelessWidget {
+
   const TarefaTile({
     Key? key,
     required this.tarefa,
@@ -44,7 +46,7 @@ class TarefaTile extends StatelessWidget {
                     ),
                     //Text(DateFormat().add_yMEd().format(DateTime.now())),
                     //Text(DateFormat('dd/MM/yyyy').format(DateTime.now())),
-                    Text(DateFormat().add_yMMMd().format(DateTime.now())),
+                    Text(DateFormat().add_yMMMd().format(DateTime.parse(tarefa.data))),
                   ],
                 ),
               ),
@@ -60,16 +62,10 @@ class TarefaTile extends StatelessWidget {
                       .add(AtualizarTarefa(tarefa: tarefa));
                 },
               ),
-              PopupMenuButton(
-                itemBuilder: ((context) => [
-                      PopupMenuItem(
-                        child: TextButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.edit),
-                          label: const Text('Editar'),
-                        ),
-                      ),
-                    ]),
+              BotaoPopUp(
+                tarefa: tarefa,
+                cancelarOuDeletar: () =>
+                    _excluirOuRemoverTarefa(context, tarefa),
               ),
             ],
           ),
@@ -78,6 +74,8 @@ class TarefaTile extends StatelessWidget {
     );
   }
 }
+
+
 
 // ListTile(
 //       title: Text(

@@ -48,3 +48,11 @@ class ExcluirTarefa extends TarefasEvent {
   @override
   List<Object> get props => [tarefa];
 }
+
+class FavoritoOnOff extends TarefasEvent {
+  final Tarefa tarefa;
+  const FavoritoOnOff({required this.tarefa});
+
+  @override
+  List<Object> get props => [tarefa];
+}

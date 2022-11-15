@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:equatable/equatable.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/models/tarefa.dart';
@@ -13,6 +15,7 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
     on<AtualizarTarefa>(_onAtualizarTarefa);
     on<ExcluirTarefa>(_onExcluirTarefa);
     on<RemoveTarefa>(_onRemoveTarefa);
+    on<FavoritasOnOff>(_onFavoritasOnOff);
   }
 
   // Recebe o evento e o emissor atuais
@@ -106,6 +109,36 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
         listaTarefasFavoritas: state.listaTarefasFavoritas,
         tarefasRemovidas: List.from(state.tarefasRemovidas)
           ..remove(event.tarefa)));
+  }
+
+  void _onFavoritasOnOff(FavoritasOnOff event, Emitter<TarefasState> emit) {
+    final state = this.state;
+
+    List<Tarefa> listaTarefasPendentes = state.listaTarefasPendentes;
+    List<Tarefa> listaTarefasFavoritas = state.listaTarefasFavoritas;
+    List<Tarefa> listaTarefasConcluidas = state.listaTarefasConcluidas;
+    if (event.tarefa.isConcluida == false) {
+      if (event.tarefa.isFavorita == false) {
+        var tarefaIndex = listaTarefasPendentes.indexOf((event.tarefa));
+        listaTarefasPendentes = List.from(listaTarefasPendentes)
+          ..remove(event.tarefa)
+          ..insert(tarefaIndex, event.tarefa.copyWith(isFavorita: true));
+        listaTarefasFavoritas.insert(
+            0, event.tarefa.copyWith(isFavorita: true));
+      } else {
+        var tarefaIndex = listaTarefasPendentes.indexOf(event.tarefa);
+        listaTarefasConcluidas = List.from(listaTarefasConcluidas)
+          ..remove(event.tarefa)
+          ..insert(tarefaIndex, event.tarefa.copyWith(isFavorita: false));
+        listaTarefasFavoritas.remove(event.tarefa);
+      }
+    }
+    emit(TarefasState(
+      listaTarefasPendentes: listaTarefasPendentes,
+      listaTarefasConcluidas: listaTarefasConcluidas,
+      listaTarefasFavoritas: listaTarefasFavoritas,
+      tarefasRemovidas: state.tarefasRemovidas,
+    ));
   }
 
   @override

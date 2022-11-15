@@ -62,6 +62,7 @@ class AdicionarATarefa extends StatelessWidget {
                     titulo: tituloController.text,
                     descricao: descricaoController.text,
                     id: geradorId(),
+                    data: DateTime.now().toString(),
                   );
                   // Metodo para criar adicionar tarefa
                   context
