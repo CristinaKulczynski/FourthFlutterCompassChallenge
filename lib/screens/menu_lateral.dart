@@ -27,7 +27,7 @@ class MenuLateral extends StatelessWidget {
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () => Navigator.of(context).pushReplacementNamed(
-                    PrincipalTodoList.id,
+                    TelaTODOList.id,
                   ),
                   child: ListTile(
                     leading: const Icon(Icons.folder_special),

@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
                 ? Temas.temasAplicativo[Tema.lightTema]
                 : Temas.temasAplicativo[Tema.darkTema],
             /*Tirar debug da tela*/
-            home: const PrincipalTodoList(),
+            home: const TelaTODOList(),
             onGenerateRoute: rotasDoAplicativo.onGenerateRoute,
           );
         },

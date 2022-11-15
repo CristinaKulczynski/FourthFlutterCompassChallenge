@@ -8,8 +8,8 @@ class RotasDoAplicativo {
     switch (routeSettings.name) {
       case Reciclar.id:
         return MaterialPageRoute(builder: (_) => const Reciclar());
-      case PrincipalTodoList.id:
-        return MaterialPageRoute(builder: (_) => const PrincipalTodoList());
+      case TelaTODOList.id:
+        return MaterialPageRoute(builder: (_) => const TelaTODOList());
       default:
         return null;
     }
