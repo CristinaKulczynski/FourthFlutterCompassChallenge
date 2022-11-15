@@ -8,6 +8,8 @@ import '../blocs/exportacao_do_bloc.dart';
 // ignore: must_be_immutable
 class TelaTODOList extends StatefulWidget {
   const TelaTODOList({Key? key}) : super(key: key);
+  // Método estático é uma porta de uma classe ao invés de fazer parte de uma instância especifica
+  static const id = 'tela_principal_todo_list';
 
   @override
   State<TelaTODOList> createState() => _TelaTODOListState();
