@@ -45,6 +45,10 @@ class MenuLateral extends StatelessWidget {
                 trailing: Text('0'),
               ),
             ),
+            Switch(
+              value: false,
+              onChanged: (novoValor) {},
+            )
           ],
         ),
       ),
