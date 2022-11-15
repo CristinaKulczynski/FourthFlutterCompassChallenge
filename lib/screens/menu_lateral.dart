@@ -3,14 +3,9 @@ import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/Reciclar.dart';
 import 'package:todolist/screens/tela_principal_todo_list.dart';
 
-class MenuLateral extends StatefulWidget {
-  const MenuLateral({super.key});
+class MenuLateral extends StatelessWidget {
+  MenuLateral({super.key});
 
-  @override
-  State<MenuLateral> createState() => _MenuLateralState();
-}
-
-class _MenuLateralState extends State<MenuLateral> {
   bool switchValor = false;
 
   @override
