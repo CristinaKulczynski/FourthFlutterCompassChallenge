@@ -41,44 +41,46 @@ class TarefaTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              tarefa.isFavorita == false
-                  ? const Icon(Icons.star_outline)
-                  : const Icon(Icons.star),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      tarefa.titulo,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 18,
-                          // Se a tarefa estiver concluida ficara riscada
-                          decoration: tarefa.isConcluida!
-                              ? TextDecoration.lineThrough
-                              : null),
-                    ),
-                    //Text(DateFormat().add_yMEd().format(DateTime.now())),
-                    //Text(DateFormat('dd/MM/yyyy').format(DateTime.now())),
-                    Text(DateFormat()
-                        .add_yMMMd()
-                        .format(DateTime.parse(tarefa.data))),
-                  ],
+          Expanded(
+            child: Row(
+              children: [
+                tarefa.isFavorita == false
+                    ? const Icon(Icons.star_outline)
+                    : const Icon(Icons.star),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        tarefa.titulo,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 18,
+                            decoration: tarefa.isConcluida!
+                                ? TextDecoration.lineThrough
+                                : null),
+                      ),
+                      Text(DateFormat()
+                          .add_yMMMd()
+                          .format(DateTime.parse(tarefa.data))),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Row(
             children: [
               Checkbox(
                 value: tarefa.isConcluida,
-                onChanged: (value) {
-                  context
-                      .read<TarefasBloc>()
-                      .add(AtualizarTarefa(tarefa: tarefa));
-                },
+                onChanged: tarefa.isConcluida == false
+                    ? (value) {
+                        context
+                            .read<TarefasBloc>()
+                            .add(AtualizarTarefa(tarefa: tarefa));
+                      }
+                    : null,
               ),
               BotaoPopUp(
                 tarefa: tarefa,
