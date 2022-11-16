@@ -7,7 +7,7 @@ import 'package:todolist/screens/pendencias.dart';
 
 // ignore: must_be_immutable
 class TelaTODOList extends StatefulWidget {
-  TelaTODOList({super.key});
+  const TelaTODOList({super.key});
   static const id = 'tela_todo_list';
 
   @override
@@ -57,7 +57,7 @@ class _TelaTODOListState extends State<TelaTODOList> {
           ),
         ],
       ),
-      drawer: MenuLateral(),
+      drawer: const MenuLateral(),
       body: _descricao[_indexDaPagina]['Nome'],
       floatingActionButton: _indexDaPagina == 0
           ? FloatingActionButton(

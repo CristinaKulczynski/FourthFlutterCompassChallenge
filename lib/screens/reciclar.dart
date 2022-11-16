@@ -15,29 +15,17 @@ class Reciclar extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Padding(
-              padding: EdgeInsets.only(left: 15),
-              child: Text(
-                'Reciclar lixeira',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.add),
-              ),
-            ],
+                padding: EdgeInsets.only(left: 15),
+                child: Text('Reciclar lixeira',
+                    style: TextStyle(fontWeight: FontWeight.bold))),
           ),
-          drawer: MenuLateral(),
+          drawer: const MenuLateral(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Center(
                 child: Chip(
                   label: Text(
-                    // Mostra quantas tarefas temos
                     ' ${state.tarefasRemovidas.length} Tarefas',
                   ),
                 ),

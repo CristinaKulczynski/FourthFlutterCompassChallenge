@@ -3,15 +3,11 @@ import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/Reciclar.dart';
 import 'package:todolist/screens/tela_todo_list.dart';
 
-// ignore: must_be_immutable
 class MenuLateral extends StatelessWidget {
-  MenuLateral({super.key});
-
-  bool switchValor = false;
+  const MenuLateral({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // SafeArea para tornar o Drawer dinâmico e adaptável
     return SafeArea(
       child: Drawer(
         child: Column(
@@ -38,17 +34,22 @@ class MenuLateral extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () => Navigator.of(context).pushReplacementNamed(
-                Reciclar.id,
-              ),
-              child: const ListTile(
-                leading: Icon(Icons.delete),
-                title: Text('Lixeira'),
-                trailing: Text('0'),
-              ),
+            const Divider(),
+            BlocBuilder<TarefasBloc, TarefasState>(
+              builder: (context, state) {
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).pushReplacementNamed(
+                    Reciclar.id,
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.delete),
+                    title: const Text('Lixeira'),
+                    trailing: Text('${state.tarefasRemovidas.length}'),
+                  ),
+                );
+              },
             ),
+            const Divider(),
             BlocBuilder<BotaoBloc, BotaoState>(
               builder: (context, state) {
                 return Switch(

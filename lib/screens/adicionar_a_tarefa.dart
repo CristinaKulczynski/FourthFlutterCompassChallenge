@@ -13,22 +13,18 @@ class AdicionarATarefa extends StatelessWidget {
     TextEditingController tituloController = TextEditingController();
     TextEditingController descricaoController = TextEditingController();
     return Container(
-      padding: EdgeInsets.only(
-        // Consulta de mídia da visualização.
-        // Inserções na parte inferior
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        child: Column(children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 10),
-            child: Text(
-              'Adicionar Tarefa',
-              style: TextStyle(fontSize: 24),
-            ),
-          ),
-          TextField(
+      padding: const EdgeInsets.all(20),
+      child: Column(children: [
+        const Text(
+          'Adicionar Tarefa',
+          style: TextStyle(fontSize: 24),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10, bottom: 10),
+          child: TextField(
             autofocus: true,
             controller: tituloController,
             decoration: const InputDecoration(
@@ -36,45 +32,42 @@ class AdicionarATarefa extends StatelessWidget {
               border: OutlineInputBorder(),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 8),
-            child: TextField(
-              autofocus: true,
-              controller: descricaoController,
-              decoration: const InputDecoration(
-                label: Text('Descrição'),
-                border: OutlineInputBorder(),
-              ),
+        ),
+        TextField(
+          autofocus: true,
+          controller: descricaoController,
+          minLines: 3,
+          maxLines: 5,
+          decoration: const InputDecoration(
+            label: Text('Descrição'),
+            border: OutlineInputBorder(),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('cancelar'),
             ),
-          ),
-          // Apenas sai do ShowModalBottomSheet
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('cancelar'),
-              ),
-              // Cria variável tarefa, chama o tarefas_event para adicionar na lista
-              ElevatedButton(
-                onPressed: () {
-                  var tarefa = Tarefa(
-                    titulo: tituloController.text,
-                    descricao: descricaoController.text,
-                    id: geradorId(),
-                    data: DateTime.now().toString(),
-                  );
-                  // Metodo para criar adicionar tarefa
-                  context
-                      .read<TarefasBloc>()
-                      .add(AdicionarTarefa(tarefa: tarefa));
-                },
-                child: const Text('Salvar'),
-              ),
-            ],
-          ),
-        ]),
-      ),
+            ElevatedButton(
+              onPressed: () {
+                var tarefa = Tarefa(
+                  titulo: tituloController.text,
+                  descricao: descricaoController.text,
+                  id: geradorId(),
+                  data: DateTime.now().toString(),
+                );
+                context
+                    .read<TarefasBloc>()
+                    .add(AdicionarTarefa(tarefa: tarefa));
+                Navigator.pop(context);
+              },
+              child: const Text('Salvar'),
+            ),
+          ],
+        ),
+      ]),
     );
   }
 }
