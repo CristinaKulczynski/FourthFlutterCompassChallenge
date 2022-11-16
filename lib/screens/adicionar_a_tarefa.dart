@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/models/tarefa.dart';
 import 'package:todolist/services/gerador_de_numeros.dart';
 
-class AdicionarATarefa extends StatelessWidget {
+class AdicionarATarefa extends StatefulWidget {
   const AdicionarATarefa({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<AdicionarATarefa> createState() => _AdicionarATarefaState();
+}
+
+class _AdicionarATarefaState extends State<AdicionarATarefa> {
+  @override
   Widget build(BuildContext context) {
     TextEditingController tituloController = TextEditingController();
     TextEditingController descricaoController = TextEditingController();
+    TextEditingController dataFinalController = TextEditingController();
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(children: [
@@ -43,6 +50,32 @@ class AdicionarATarefa extends StatelessWidget {
             border: OutlineInputBorder(),
           ),
         ),
+        const SizedBox(
+          height: 10,
+        ),
+        TextField(
+          autofocus: true,
+          controller: dataFinalController,
+          decoration: const InputDecoration(
+            icon: Icon(Icons.calendar_month_rounded),
+            labelText: 'Selecione a Data',
+            border: OutlineInputBorder(),
+          ),
+          onTap: () async {
+            DateTime? pickeddate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime(2023));
+
+            if (pickeddate != null) {
+              setState(() {
+                dataFinalController.text =
+                    DateFormat("yyyy-MM-dd").format(pickeddate);
+              });
+            }
+          },
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -57,6 +90,7 @@ class AdicionarATarefa extends StatelessWidget {
                   descricao: descricaoController.text,
                   id: GUIDGen.gerador(),
                   data: DateTime.now().toString(),
+                  dataFinal: dataFinalController.text,
                 );
                 context
                     .read<TarefasBloc>()

@@ -15,6 +15,7 @@ class EditarATarefa extends StatelessWidget {
         TextEditingController(text: todasTarefas.titulo);
     TextEditingController descricaoController =
         TextEditingController(text: todasTarefas.descricao);
+    TextEditingController dataFinalController = TextEditingController();
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(children: [
@@ -46,6 +47,32 @@ class EditarATarefa extends StatelessWidget {
             border: OutlineInputBorder(),
           ),
         ),
+        const SizedBox(
+          height: 10,
+        ),
+        TextField(
+          autofocus: true,
+          controller: dataFinalController,
+          decoration: const InputDecoration(
+            icon: Icon(Icons.calendar_month_rounded),
+            labelText: 'Selecione a Data',
+            border: OutlineInputBorder(),
+          ),
+          onTap: () async {
+            DateTime? pickeddate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime(2023));
+
+            if (pickeddate != null) {
+              setState(() {
+                dataFinalController.text =
+                    DateFormat("yyyy-MM-dd").format(pickeddate);
+              });
+            }
+          },
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -62,6 +89,7 @@ class EditarATarefa extends StatelessWidget {
                   isConcluida: false,
                   isFavorita: todasTarefas.isFavorita,
                   data: DateTime.now().toString(),
+                  dataFinal: '',
                 );
                 context.read<TarefasBloc>().add(EditarTarefa(
                       todasTarefas: todasTarefas,

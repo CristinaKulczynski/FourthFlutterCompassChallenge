@@ -6,6 +6,7 @@ class Tarefa extends Equatable {
   final String descricao;
   final String id;
   final String data;
+  final String dataFinal;
   bool? isConcluida;
   bool? isFavorita;
   bool? isDeletada;
@@ -15,6 +16,7 @@ class Tarefa extends Equatable {
     required this.descricao,
     required this.id,
     required this.data,
+    required this.dataFinal,
     this.isConcluida,
     this.isFavorita,
     this.isDeletada,
@@ -29,6 +31,7 @@ class Tarefa extends Equatable {
     String? descricao,
     String? id,
     String? data,
+    String? dataFinal,
     bool? isConcluida,
     bool? isDeletada,
     bool? isFavorita,
@@ -38,6 +41,7 @@ class Tarefa extends Equatable {
       descricao: descricao ?? this.descricao,
       id: id ?? this.id,
       data: data ?? this.data,
+      dataFinal: dataFinal ?? this.dataFinal,
       isConcluida: isConcluida ?? this.isConcluida,
       isDeletada: isDeletada ?? this.isDeletada,
       isFavorita: isFavorita ?? this.isFavorita,
@@ -50,6 +54,7 @@ class Tarefa extends Equatable {
       'descricao': descricao,
       'id': id,
       'data': data,
+      'dataFinal': dataFinal,
       'isConcluida': isConcluida,
       'isDeletada': isDeletada,
       'is': isFavorita,
@@ -62,6 +67,7 @@ class Tarefa extends Equatable {
       descricao: map['descricao'] ?? '',
       id: map['id'] ?? '',
       data: map['data'] ?? '',
+      dataFinal: map['dataFinal'] ?? '',
       isConcluida: map['isConcluida'],
       isDeletada: map['isDeletada'],
       isFavorita: map['isFavorita'],
@@ -74,6 +80,7 @@ class Tarefa extends Equatable {
         descricao,
         id,
         data,
+        dataFinal,
         isConcluida,
         isDeletada,
         isFavorita,
