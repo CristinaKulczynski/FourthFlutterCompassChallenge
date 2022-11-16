@@ -23,8 +23,8 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
         //   ..add(event.tarefa),
         listaTarefasPendentes: List.from(state.listaTarefasPendentes)
           ..add(event.tarefa),
-        listaTarefasFavoritas: state.listaTarefasFavoritas,
         listaTarefasConcluidas: state.listaTarefasConcluidas,
+        listaTarefasFavoritas: state.listaTarefasFavoritas,
         tarefasRemovidas: state.tarefasRemovidas));
   }
 
@@ -37,8 +37,9 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
     //   ..remove(tarefa);
 
     List<Tarefa> listaTarefasPendentes = state.listaTarefasPendentes;
-    List<Tarefa> listaTarefasFavoritas = state.listaTarefasFavoritas;
     List<Tarefa> listaTarefasConcluidas = state.listaTarefasConcluidas;
+    List<Tarefa> listaTarefasFavoritas = state.listaTarefasFavoritas;
+
     //Se o valor da tarefa for falso, adiciona como verdadeiro e vice-versa
     // tarefa.isConcluida == false
     //     ? listaDeTodasTarefas.insert(index, tarefa.copyWith(isConcluida: true))
@@ -49,13 +50,13 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
           ..remove(tarefa);
         listaTarefasConcluidas.insert(0, tarefa.copyWith(isConcluida: true));
       } else {
-        var taskIndex = listaTarefasFavoritas.indexOf(tarefa);
+        var tarefaIndex = listaTarefasFavoritas.indexOf(tarefa);
         listaTarefasPendentes = List.from(listaTarefasPendentes)
           ..remove(tarefa);
         listaTarefasConcluidas.insert(0, tarefa.copyWith(isConcluida: true));
         listaTarefasFavoritas = List.from(listaTarefasFavoritas)
           ..remove(tarefa)
-          ..insert(taskIndex, tarefa.copyWith(isConcluida: true));
+          ..insert(tarefaIndex, tarefa.copyWith(isConcluida: true));
       }
     } else {
       if (tarefa.isFavorita == false) {

@@ -17,8 +17,8 @@ class TelaTODOList extends StatefulWidget {
 class _TelaTODOListState extends State<TelaTODOList> {
   final List<Map<String, dynamic>> _descricao = [
     {'Nome': const Pendencias(), 'titulo': 'Pendencias'},
-    {'Nome': const Favoritos(), 'titulo': 'Favoritas'},
     {'Nome': const Completas(), 'titulo': 'Completas'},
+    {'Nome': const Favoritos(), 'titulo': 'Favoritas'},
   ];
 
   var _indexDaPagina = 0;

@@ -79,7 +79,7 @@ class TarefaTile extends StatelessWidget {
             children: [
               Checkbox(
                 value: tarefa.isConcluida,
-                onChanged: tarefa.isConcluida == false
+                onChanged: tarefa.isDeletada == false
                     ? (value) {
                         context
                             .read<TarefasBloc>()
