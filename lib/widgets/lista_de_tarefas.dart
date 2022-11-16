@@ -44,13 +44,3 @@ class ListaDeTarefas extends StatelessWidget {
     );
   }
 }
-
-// Expanded(
-//       child: ListView.builder(
-//         itemCount: listaDeTarefas.length,
-//         itemBuilder: ((context, index) {
-//           var tarefa = listaDeTarefas[index];
-//           return TarefaTile(tarefa: tarefa);
-//         }),
-//       ),
-//     );

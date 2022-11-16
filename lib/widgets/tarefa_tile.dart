@@ -79,13 +79,14 @@ class TarefaTile extends StatelessWidget {
             children: [
               Checkbox(
                 value: tarefa.isConcluida,
-                onChanged: tarefa.isDeletada == false
-                    ? (value) {
-                        context
-                            .read<TarefasBloc>()
-                            .add(AtualizarTarefa(tarefa: tarefa));
-                      }
-                    : null,
+                onChanged:
+                    tarefa.isDeletada == false && tarefa.isConcluida == false
+                        ? (value) {
+                            context
+                                .read<TarefasBloc>()
+                                .add(AtualizarTarefa(tarefa: tarefa));
+                          }
+                        : null,
               ),
               BotaoPopUp(
                 tarefa: tarefa,
@@ -109,23 +110,3 @@ class TarefaTile extends StatelessWidget {
     );
   }
 }
-
-
-
-// ListTile(
-//       title: Text(
-//         tarefa.titulo,
-//         overflow: TextOverflow.ellipsis,
-//         style: TextStyle(
-//             // Se a tarefa estiver concluida ficara riscada
-//             decoration:
-//                 tarefa.isConcluida! ? TextDecoration.lineThrough : null),
-//       ),
-//       trailing: Checkbox(
-//         value: tarefa.isConcluida,
-//         onChanged: (value) {
-//           context.read<TarefasBloc>().add(AtualizarTarefa(tarefa: tarefa));
-//         },
-//       ),
-//       onLongPress: () => _excluirOuRemoverTarefa(context, tarefa),
-//     );
