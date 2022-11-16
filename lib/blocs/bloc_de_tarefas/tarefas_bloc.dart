@@ -91,17 +91,16 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
   void _onRemoveTarefa(RemoveTarefa event, Emitter<TarefasState> emit) {
     final state = this.state;
     emit(TarefasState(
-      // listaDeTodasTarefas: List.from(state.listaDeTodasTarefas)
-      //   ..remove(event.tarefa),
-      listaTarefasPendentes: List.from(state.listaTarefasPendentes)
-        ..remove(event.tarefa),
-      listaTarefasConcluidas: List.from(state.listaTarefasConcluidas)
-        ..remove(event.tarefa),
-      listaTarefasFavoritas: List.from(state.listaTarefasFavoritas)
-        ..remove(event.tarefa),
-      tarefasRemovidas: List.from(state.tarefasRemovidas)
-        ..add(event.tarefa.copyWith(isDeletada: true)),
-    ));
+        // listaDeTodasTarefas: List.from(state.listaDeTodasTarefas)
+        //   ..remove(event.tarefa),
+        listaTarefasPendentes: List.from(state.listaTarefasPendentes)
+          ..remove(event.tarefa),
+        listaTarefasConcluidas: List.from(state.listaTarefasConcluidas)
+          ..remove(event.tarefa),
+        listaTarefasFavoritas: List.from(state.listaTarefasFavoritas)
+          ..remove(event.tarefa),
+        tarefasRemovidas: List.from(state.tarefasRemovidas)
+          ..add(event.tarefa.copyWith(isDeletada: true))));
   }
 
   void _onExcluirTarefa(ExcluirTarefa event, Emitter<TarefasState> emit) {
@@ -117,13 +116,12 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
 
   void _onFavoritasOnOff(FavoritasOnOff event, Emitter<TarefasState> emit) {
     final state = this.state;
-
     List<Tarefa> listaTarefasPendentes = state.listaTarefasPendentes;
-    List<Tarefa> listaTarefasFavoritas = state.listaTarefasFavoritas;
     List<Tarefa> listaTarefasConcluidas = state.listaTarefasConcluidas;
+    List<Tarefa> listaTarefasFavoritas = state.listaTarefasFavoritas;
     if (event.tarefa.isConcluida == false) {
       if (event.tarefa.isFavorita == false) {
-        var tarefaIndex = listaTarefasPendentes.indexOf((event.tarefa));
+        var tarefaIndex = listaTarefasPendentes.indexOf(event.tarefa);
         listaTarefasPendentes = List.from(listaTarefasPendentes)
           ..remove(event.tarefa)
           ..insert(tarefaIndex, event.tarefa.copyWith(isFavorita: true));
@@ -131,7 +129,7 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
             0, event.tarefa.copyWith(isFavorita: true));
       } else {
         var tarefaIndex = listaTarefasPendentes.indexOf(event.tarefa);
-        listaTarefasConcluidas = List.from(listaTarefasConcluidas)
+        listaTarefasPendentes = List.from(listaTarefasPendentes)
           ..remove(event.tarefa)
           ..insert(tarefaIndex, event.tarefa.copyWith(isFavorita: false));
         listaTarefasFavoritas.remove(event.tarefa);
@@ -160,6 +158,38 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
     ));
   }
 
+  void _onEditarTarefa(EditarTarefa event, Emitter<TarefasState> emit) {
+    final state = this.state;
+    List<Tarefa> listaTarefasFavoritas = state.listaTarefasFavoritas;
+    if (event.todasTarefas.isFavorita == true) {
+      listaTarefasFavoritas
+        ..remove(event.todasTarefas)
+        ..insert(0, event.novaTarefa);
+    }
+    emit(TarefasState(
+        listaTarefasPendentes: List.from(state.listaTarefasPendentes)
+          ..remove(event.todasTarefas)
+          ..insert(0, event.novaTarefa),
+        listaTarefasConcluidas: state.listaTarefasConcluidas
+          ..remove(event.todasTarefas),
+        listaTarefasFavoritas: listaTarefasFavoritas,
+        tarefasRemovidas: state.tarefasRemovidas));
+  }
+
+  void _onRestaurarTarefa(RestaurarTarefa event, Emitter<TarefasState> emit) {
+    final state = this.state;
+    emit(TarefasState(
+        tarefasRemovidas: List.from(state.tarefasRemovidas)
+          ..remove(event.tarefa),
+        listaTarefasPendentes: List.from(state.listaTarefasPendentes)
+          ..insert(
+              0,
+              event.tarefa.copyWith(
+                  isDeletada: false, isConcluida: false, isFavorita: false)),
+        listaTarefasConcluidas: state.listaTarefasConcluidas,
+        listaTarefasFavoritas: state.listaTarefasFavoritas));
+  }
+
   @override
   TarefasState? fromJson(Map<String, dynamic> json) {
     return TarefasState.fromMap(json);
@@ -168,42 +198,5 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
   @override
   Map<String, dynamic>? toJson(TarefasState state) {
     return state.toMap();
-  }
-
-  void _onEditarTarefa(EditarTarefa event, Emitter<TarefasState> emit) {
-    final state = this.state;
-    List<Tarefa> listaDeTarefasFavoritas = state.listaTarefasFavoritas;
-    if (event.todasTarefas.isFavorita == true) {
-      listaDeTarefasFavoritas
-        ..remove(event.todasTarefas)
-        ..insert(0, event.novaTarefa);
-    }
-    emit(TarefasState(
-      listaTarefasPendentes: List.from(state.listaTarefasPendentes)
-        ..remove(event.todasTarefas)
-        ..insert(0, event.novaTarefa),
-      listaTarefasConcluidas: listaDeTarefasFavoritas,
-      tarefasRemovidas: state.tarefasRemovidas,
-    ));
-  }
-
-  void _onRestaurarTarefa(RestaurarTarefa event, Emitter<TarefasState> emit) {
-    final state = this.state;
-    emit(
-      TarefasState(
-        tarefasRemovidas: List.from(state.tarefasRemovidas)
-          ..remove(event.tarefa),
-        listaTarefasPendentes: List.from(state.listaTarefasPendentes)
-          ..insert(
-              0,
-              event.tarefa.copyWith(
-                isDeletada: false,
-                isConcluida: false,
-                isFavorita: false,
-              )),
-        listaTarefasConcluidas: state.listaTarefasConcluidas,
-        listaTarefasFavoritas: state.listaTarefasFavoritas,
-      ),
-    );
   }
 }

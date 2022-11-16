@@ -55,7 +55,7 @@ class AdicionarATarefa extends StatelessWidget {
                 var tarefa = Tarefa(
                   titulo: tituloController.text,
                   descricao: descricaoController.text,
-                  id: geradorId(),
+                  id: GUIDGen.gerador(),
                   data: DateTime.now().toString(),
                 );
                 context

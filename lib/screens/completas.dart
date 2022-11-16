@@ -7,7 +7,7 @@ import '../blocs/exportacao_do_bloc.dart';
 class Completas extends StatelessWidget {
   const Completas({Key? key}) : super(key: key);
 
-  static const id = 'tela_principal_todo_list';
+  static const id = 'tela_todo_list';
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TarefasBloc, TarefasState>(

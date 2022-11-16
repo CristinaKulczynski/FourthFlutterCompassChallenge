@@ -26,9 +26,12 @@ class TarefaTile extends StatelessWidget {
       isScrollControlled: true,
       builder: (context) => SingleChildScrollView(
         child: Container(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: EditarATarefa(todasTarefas: tarefa),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: EditarATarefa(
+            todasTarefas: tarefa,
+          ),
         ),
       ),
     );
@@ -47,23 +50,25 @@ class TarefaTile extends StatelessWidget {
                 tarefa.isFavorita == false
                     ? const Icon(Icons.star_outline)
                     : const Icon(Icons.star),
-                const SizedBox(width: 10),
+                const SizedBox(
+                  width: 10,
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(tarefa.titulo,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 18,
+                              decoration: tarefa.isConcluida!
+                                  ? TextDecoration.lineThrough
+                                  : null)),
                       Text(
-                        tarefa.titulo,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 18,
-                            decoration: tarefa.isConcluida!
-                                ? TextDecoration.lineThrough
-                                : null),
+                        DateFormat()
+                            .add_yMMMd()
+                            .format(DateTime.parse(tarefa.data)),
                       ),
-                      Text(DateFormat()
-                          .add_yMMMd()
-                          .format(DateTime.parse(tarefa.data))),
                     ],
                   ),
                 ),

@@ -42,25 +42,13 @@ class TarefasState extends Equatable {
       //   ),
       // ),
       listaTarefasPendentes: List<Tarefa>.from(
-        (map['listaTarefasPendentes'] as List<int>).map<Tarefa>(
-          (x) => Tarefa.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+          map['listaTarefasPendentes']?.map((x) => Tarefa.fromMap(x))),
       listaTarefasFavoritas: List<Tarefa>.from(
-        (map['listaTarefasFavoritas'] as List<int>).map<Tarefa>(
-          (x) => Tarefa.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+          map['listaTarefaFavoritas']?.map((x) => Tarefa.fromMap(x))),
       listaTarefasConcluidas: List<Tarefa>.from(
-        (map['listaTarefasConcluidas'] as List<int>).map<Tarefa>(
-          (x) => Tarefa.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+          map['listaTarefasConcluidos']?.map((x) => Tarefa.fromMap(x))),
       tarefasRemovidas: List<Tarefa>.from(
-        (map['tarefasRemovidas'] as List<int>).map<Tarefa>(
-          (x) => Tarefa.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+          map['listaTarefasPendentes']?.map((x) => Tarefa.fromMap(x))),
     );
   }
 }
