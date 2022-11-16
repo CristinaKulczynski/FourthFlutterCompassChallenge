@@ -13,14 +13,12 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
     on<FavoritasOnOff>(_onFavoritasOnOff);
     on<EditarTarefa>(_onEditarTarefa);
     on<RestaurarTarefa>(_onRestaurarTarefa);
+    on<ExcluiTodasTarefas>(_onExcluiTodasTarefas);
   }
 
-  // Recebe o evento e o emissor atuais
   void _onAdicionarTarefa(AdicionarTarefa event, Emitter<TarefasState> emit) {
     final state = this.state;
     emit(TarefasState(
-        // listaDeTodasTarefas: List.from(state.listaDeTodasTarefas)
-        //   ..add(event.tarefa),
         listaTarefasPendentes: List.from(state.listaTarefasPendentes)
           ..add(event.tarefa),
         listaTarefasConcluidas: state.listaTarefasConcluidas,
@@ -31,19 +29,11 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
   void _onAtualizarTarefa(AtualizarTarefa event, Emitter<TarefasState> emit) {
     final state = this.state;
     final tarefa = event.tarefa;
-    //final int index = state.listaDeTodasTarefas.indexOf(tarefa);
-
-    // List<Tarefa> listaDeTodasTarefas = List.from(state.listaDeTodasTarefas)
-    //   ..remove(tarefa);
 
     List<Tarefa> listaTarefasPendentes = state.listaTarefasPendentes;
     List<Tarefa> listaTarefasConcluidas = state.listaTarefasConcluidas;
     List<Tarefa> listaTarefasFavoritas = state.listaTarefasFavoritas;
 
-    //Se o valor da tarefa for falso, adiciona como verdadeiro e vice-versa
-    // tarefa.isConcluida == false
-    //     ? listaDeTodasTarefas.insert(index, tarefa.copyWith(isConcluida: true))
-    //     : listaDeTodasTarefas.insert(index, tarefa.copyWith(isConcluida: false));
     if (tarefa.isConcluida == false) {
       if (tarefa.isFavorita == false) {
         listaTarefasPendentes = List.from(listaTarefasPendentes)
@@ -75,13 +65,7 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
           ..insert(tarefaIndex, tarefa.copyWith(isConcluida: false));
       }
     }
-    //Emitindo nova tarefa
-    // emit(TarefasState(
-    //   listaDeTodasTarefas: listaDeTodasTarefas,
-    //   tarefasRemovidas: state.tarefasRemovidas,
-    // ));
     emit(TarefasState(
-      // listaDeTodasTarefas: listaDeTodasTarefas,
       listaTarefasPendentes: listaTarefasPendentes,
       listaTarefasConcluidas: listaTarefasConcluidas,
       listaTarefasFavoritas: listaTarefasFavoritas,
@@ -89,11 +73,19 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
     ));
   }
 
+  void _onExcluirTarefa(ExcluirTarefa event, Emitter<TarefasState> emit) {
+    final state = this.state;
+    emit(TarefasState(
+        listaTarefasPendentes: state.listaTarefasPendentes,
+        listaTarefasConcluidas: state.listaTarefasConcluidas,
+        listaTarefasFavoritas: state.listaTarefasFavoritas,
+        tarefasRemovidas: List.from(state.tarefasRemovidas)
+          ..remove(event.tarefa)));
+  }
+
   void _onRemoveTarefa(RemoveTarefa event, Emitter<TarefasState> emit) {
     final state = this.state;
     emit(TarefasState(
-        // listaDeTodasTarefas: List.from(state.listaDeTodasTarefas)
-        //   ..remove(event.tarefa),
         listaTarefasPendentes: List.from(state.listaTarefasPendentes)
           ..remove(event.tarefa),
         listaTarefasConcluidas: List.from(state.listaTarefasConcluidas)
@@ -102,17 +94,6 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
           ..remove(event.tarefa),
         tarefasRemovidas: List.from(state.tarefasRemovidas)
           ..add(event.tarefa.copyWith(isDeletada: true))));
-  }
-
-  void _onExcluirTarefa(ExcluirTarefa event, Emitter<TarefasState> emit) {
-    final state = this.state;
-    emit(TarefasState(
-        // listaDeTodasTarefas: state.listaDeTodasTarefas,
-        listaTarefasPendentes: state.listaTarefasPendentes,
-        listaTarefasConcluidas: state.listaTarefasConcluidas,
-        listaTarefasFavoritas: state.listaTarefasFavoritas,
-        tarefasRemovidas: List.from(state.tarefasRemovidas)
-          ..remove(event.tarefa)));
   }
 
   void _onFavoritasOnOff(FavoritasOnOff event, Emitter<TarefasState> emit) {
@@ -189,6 +170,19 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
                   isDeletada: false, isConcluida: false, isFavorita: false)),
         listaTarefasConcluidas: state.listaTarefasConcluidas,
         listaTarefasFavoritas: state.listaTarefasFavoritas));
+  }
+
+  void _onExcluiTodasTarefas(
+      ExcluiTodasTarefas event, Emitter<TarefasState> emit) {
+    final state = this.state;
+    emit(
+      TarefasState(
+        tarefasRemovidas: List.from(state.tarefasRemovidas)..clear(),
+        listaTarefasPendentes: state.listaTarefasPendentes,
+        listaTarefasConcluidas: state.listaTarefasConcluidas,
+        listaTarefasFavoritas: state.listaTarefasFavoritas,
+      ),
+    );
   }
 
   @override

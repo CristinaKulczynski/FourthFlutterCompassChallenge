@@ -60,13 +60,12 @@ class BotaoPopUp extends StatelessWidget {
                     onTap: restaurar,
                   ),
                   PopupMenuItem(
-                    child: TextButton.icon(
-                      onPressed: null,
-                      icon: const Icon(Icons.delete_forever),
-                      label: const Text('Excluir permanentemente'),
-                    ),
-                    onTap: cancelarOuDeletar,
-                  ),
+                      child: TextButton.icon(
+                        onPressed: null,
+                        icon: const Icon(Icons.delete_forever),
+                        label: const Text('Excluir permanentemente'),
+                      ),
+                      onTap: cancelarOuDeletar),
                 ]);
   }
 }

@@ -14,10 +14,10 @@ class TarefaTile extends StatelessWidget {
 
   final Tarefa tarefa;
 
-  void _excluirOuRemoverTarefa(BuildContext contet, Tarefa tarefa) {
+  void _excluirOuRemoverTarefa(BuildContext ctx, Tarefa tarefa) {
     tarefa.isDeletada!
-        ? contet.read<TarefasBloc>().add(ExcluirTarefa(tarefa: tarefa))
-        : contet.read<TarefasBloc>().add(RemoveTarefa(tarefa: tarefa));
+        ? ctx.read<TarefasBloc>().add(ExcluirTarefa(tarefa: tarefa))
+        : ctx.read<TarefasBloc>().add(RemoveTarefa(tarefa: tarefa));
   }
 
   void _editarATarefa(BuildContext context) {

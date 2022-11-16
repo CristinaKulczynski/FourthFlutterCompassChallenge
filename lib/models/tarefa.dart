@@ -6,8 +6,8 @@ class Tarefa extends Equatable {
   final String descricao;
   final String id;
   final String data;
-  bool? isFavorita;
   bool? isConcluida;
+  bool? isFavorita;
   bool? isDeletada;
 
   Tarefa({
@@ -15,12 +15,12 @@ class Tarefa extends Equatable {
     required this.descricao,
     required this.id,
     required this.data,
-    this.isFavorita,
     this.isConcluida,
+    this.isFavorita,
     this.isDeletada,
   }) {
-    isFavorita = isFavorita ?? false;
     isConcluida = isConcluida ?? false;
+    isFavorita = isFavorita ?? false;
     isDeletada = isDeletada ?? false;
   }
 
@@ -29,18 +29,18 @@ class Tarefa extends Equatable {
     String? descricao,
     String? id,
     String? data,
-    bool? isFavorita,
     bool? isConcluida,
     bool? isDeletada,
+    bool? isFavorita,
   }) {
     return Tarefa(
       titulo: titulo ?? this.titulo,
       descricao: descricao ?? this.descricao,
       id: id ?? this.id,
       data: data ?? this.data,
-      isFavorita: isFavorita ?? this.isFavorita,
       isConcluida: isConcluida ?? this.isConcluida,
       isDeletada: isDeletada ?? this.isDeletada,
+      isFavorita: isFavorita ?? this.isFavorita,
     );
   }
 
@@ -50,22 +50,21 @@ class Tarefa extends Equatable {
       'descricao': descricao,
       'id': id,
       'data': data,
-      'is': isFavorita,
       'isConcluida': isConcluida,
       'isDeletada': isDeletada,
+      'is': isFavorita,
     };
   }
 
   factory Tarefa.fromMap(Map<String, dynamic> map) {
     return Tarefa(
-      titulo: map['titulo'] as String,
-      descricao: map['descricao'] as String,
-      id: map['id'] as String,
-      data: map['data'] as String,
-      isFavorita: map['isFavorita'] != null ? map['isFavorita'] as bool : null,
-      isConcluida:
-          map['isConcluida'] != null ? map['isConcluida'] as bool : null,
-      isDeletada: map['isDeletada'] != null ? map['isDeletada'] as bool : null,
+      titulo: map['titulo'] ?? '',
+      descricao: map['descricao'] ?? '',
+      id: map['id'] ?? '',
+      data: map['data'] ?? '',
+      isConcluida: map['isConcluida'],
+      isDeletada: map['isDeletada'],
+      isFavorita: map['isFavorita'],
     );
   }
 
@@ -75,8 +74,8 @@ class Tarefa extends Equatable {
         descricao,
         id,
         data,
-        isFavorita,
         isConcluida,
         isDeletada,
+        isFavorita,
       ];
 }

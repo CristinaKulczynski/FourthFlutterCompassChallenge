@@ -4,7 +4,10 @@ import 'package:todolist/models/tarefa.dart';
 
 class EditarATarefa extends StatelessWidget {
   final Tarefa todasTarefas;
-  const EditarATarefa({Key? key, required this.todasTarefas}) : super(key: key);
+  const EditarATarefa({
+    Key? key,
+    required this.todasTarefas,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

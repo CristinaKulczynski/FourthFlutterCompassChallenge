@@ -18,6 +18,20 @@ class Reciclar extends StatelessWidget {
                 padding: EdgeInsets.only(left: 15),
                 child: Text('Reciclar lixeira',
                     style: TextStyle(fontWeight: FontWeight.bold))),
+            actions: [
+              PopupMenuButton(
+                  itemBuilder: (context) => [
+                        PopupMenuItem(
+                            child: TextButton.icon(
+                              onPressed: null,
+                              icon: const Icon(Icons.delete_forever),
+                              label: const Text('Exclua todas as tarefas'),
+                            ),
+                            onTap: () => context
+                                .read<TarefasBloc>()
+                                .add(ExcluiTodasTarefas())),
+                      ])
+            ],
           ),
           drawer: const MenuLateral(),
           body: Column(

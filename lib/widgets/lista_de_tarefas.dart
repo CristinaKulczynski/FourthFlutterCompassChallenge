@@ -18,9 +18,8 @@ class ListaDeTarefas extends StatelessWidget {
           children: listaDeTarefas
               .map((tarefa) => ExpansionPanelRadio(
                   value: tarefa.id,
-                  headerBuilder: (context, isOpen) => TarefaTile(
-                        tarefa: tarefa,
-                      ),
+                  headerBuilder: (context, isOpen) =>
+                      TarefaTile(tarefa: tarefa),
                   body: ListTile(
                     title: SelectableText.rich(TextSpan(children: [
                       const TextSpan(

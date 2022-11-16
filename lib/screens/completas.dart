@@ -6,8 +6,8 @@ import '../blocs/exportacao_do_bloc.dart';
 // ignore: must_be_immutable
 class Completas extends StatelessWidget {
   const Completas({Key? key}) : super(key: key);
-
   static const id = 'tela_todo_list';
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TarefasBloc, TarefasState>(

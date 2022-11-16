@@ -3,7 +3,6 @@ import 'package:todolist/models/tarefa.dart';
 import 'package:todolist/widgets/lista_de_tarefas.dart';
 import '../blocs/exportacao_do_bloc.dart';
 
-// ignore: must_be_immutable
 class Favoritos extends StatelessWidget {
   const Favoritos({Key? key}) : super(key: key);
   static const id = 'tela_todo_list';

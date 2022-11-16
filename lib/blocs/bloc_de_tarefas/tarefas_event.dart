@@ -20,13 +20,6 @@ class AtualizarTarefa extends TarefasEvent {
   List<Object> get props => [tarefa];
 }
 
-class RestaurarTarefa extends TarefasEvent {
-  final Tarefa tarefa;
-  const RestaurarTarefa({required this.tarefa});
-  @override
-  List<Object> get props => [tarefa];
-}
-
 class RemoveTarefa extends TarefasEvent {
   final Tarefa tarefa;
   const RemoveTarefa({required this.tarefa});
@@ -41,6 +34,13 @@ class ExcluirTarefa extends TarefasEvent {
   List<Object> get props => [tarefa];
 }
 
+class FavoritasOnOff extends TarefasEvent {
+  final Tarefa tarefa;
+  const FavoritasOnOff({required this.tarefa});
+  @override
+  List<Object> get props => [tarefa];
+}
+
 class EditarTarefa extends TarefasEvent {
   final Tarefa todasTarefas;
   final Tarefa novaTarefa;
@@ -49,9 +49,11 @@ class EditarTarefa extends TarefasEvent {
   List<Object> get props => [todasTarefas, novaTarefa];
 }
 
-class FavoritasOnOff extends TarefasEvent {
+class RestaurarTarefa extends TarefasEvent {
   final Tarefa tarefa;
-  const FavoritasOnOff({required this.tarefa});
+  const RestaurarTarefa({required this.tarefa});
   @override
   List<Object> get props => [tarefa];
 }
+
+class ExcluiTodasTarefas extends TarefasEvent {}
