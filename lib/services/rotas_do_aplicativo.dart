@@ -8,7 +8,7 @@ class RotasDoAplicativo {
       case Reciclar.id:
         return MaterialPageRoute(builder: (_) => const Reciclar());
       case TelaTODOList.id:
-        return MaterialPageRoute(builder: (_) => TelaTODOList());
+        return MaterialPageRoute(builder: (_) => const TelaTODOList());
       default:
         return null;
     }

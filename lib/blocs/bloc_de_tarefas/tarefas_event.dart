@@ -1,7 +1,5 @@
 part of 'tarefas_bloc.dart';
 
-// Classes responsáveis pelas ações adicionar, atualizar status e deletar tarefa.
-
 abstract class TarefasEvent extends Equatable {
   const TarefasEvent();
 

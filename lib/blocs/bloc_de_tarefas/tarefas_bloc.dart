@@ -1,15 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/models/tarefa.dart';
-import 'package:todolist/widgets/lista_de_tarefas.dart';
 part 'tarefas_event.dart';
 part 'tarefas_state.dart';
 
-// Tarefas bloc serve para controlar os eventos e emitir um novo estado da tarefa
-
 class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
   TarefasBloc() : super(const TarefasState()) {
-    // Lógica para fazer as ações
     on<AdicionarTarefa>(_onAdicionarTarefa);
     on<AtualizarTarefa>(_onAtualizarTarefa);
     on<ExcluirTarefa>(_onExcluirTarefa);
@@ -29,20 +25,13 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
           ..add(event.tarefa),
         listaTarefasFavoritas: state.listaTarefasFavoritas,
         listaTarefasConcluidas: state.listaTarefasConcluidas,
-
-        // O estado das tarefas removidas deve ser mostrado
-        // Para que quando uma tarefa for adicionada
-        // A lista de tarefas removidas não seja apagada
         tarefasRemovidas: state.tarefasRemovidas));
   }
 
   void _onAtualizarTarefa(AtualizarTarefa event, Emitter<TarefasState> emit) {
     final state = this.state;
     final tarefa = event.tarefa;
-    // variável para atualizar a tarefa no lugar certo
     //final int index = state.listaDeTodasTarefas.indexOf(tarefa);
-
-    // Criando nova lista e removendo tarefa antiga
 
     // List<Tarefa> listaDeTodasTarefas = List.from(state.listaDeTodasTarefas)
     //   ..remove(tarefa);

@@ -19,7 +19,6 @@ class Tarefa extends Equatable {
     this.isConcluida,
     this.isDeletada,
   }) {
-    // inicializar booleanos
     isFavorita = isFavorita ?? false;
     isConcluida = isConcluida ?? false;
     isDeletada = isDeletada ?? false;
@@ -50,7 +49,7 @@ class Tarefa extends Equatable {
       'titulo': titulo,
       'descricao': descricao,
       'id': id,
-      'data' : data,
+      'data': data,
       'is': isFavorita,
       'isConcluida': isConcluida,
       'isDeletada': isDeletada,

@@ -1,14 +1,11 @@
 part of 'tarefas_bloc.dart';
 
 class TarefasState extends Equatable {
-  // final List<Tarefa> listaDeTodasTarefas;
   final List<Tarefa> listaTarefasPendentes;
   final List<Tarefa> listaTarefasConcluidas;
   final List<Tarefa> listaTarefasFavoritas;
   final List<Tarefa> tarefasRemovidas;
-
   const TarefasState({
-    //  this.listaDeTodasTarefas = const <Tarefa>[],
     this.listaTarefasPendentes = const <Tarefa>[],
     this.listaTarefasConcluidas = const <Tarefa>[],
     this.listaTarefasFavoritas = const <Tarefa>[],
