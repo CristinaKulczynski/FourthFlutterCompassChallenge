@@ -32,11 +32,11 @@ class Temas {
     Tema.lightTema: ThemeData(
       brightness: Brightness.light,
       primaryColor: Colors.white,
-      primarySwatch: Colors.grey,
+      primarySwatch: Colors.pink,
       backgroundColor: const Color(0xFFE5E5E5),
       dividerColor: const Color(0xff757575),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: Colors.black, foregroundColor: Colors.white),
+          backgroundColor: Colors.pink, foregroundColor: Colors.white),
       textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all(Colors.black))),
@@ -44,9 +44,9 @@ class Temas {
         subtitle1: TextStyle(color: Colors.black),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Colors.grey,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.white),
+          backgroundColor: Colors.pink,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey),
     ),
   };
 }
