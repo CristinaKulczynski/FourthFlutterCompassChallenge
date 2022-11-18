@@ -48,6 +48,37 @@ class TarefaTile extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
+                  Container(
+                    alignment: Alignment.bottomCenter,
+                    width: 50,
+                    height: MediaQuery.of(context).size.height * .075,
+                    color: Functions().calcularData(data: tarefa.dataFinal) < 2
+                        ? Colors.red
+                        : Functions().calcularData(data: tarefa.dataFinal) < 4
+                            ? Colors.yellow
+                            : Colors.green,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 9),
+                          child: Text(
+                            Functions()
+                                .calcularData(data: tarefa.dataFinal)
+                                .toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        const Text(
+                          "dias",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   tarefa.isFavorita == false
                       ? const Icon(Icons.star_outline)
                       : const Icon(Icons.star),
@@ -66,7 +97,7 @@ class TarefaTile extends StatelessWidget {
                                     ? TextDecoration.lineThrough
                                     : null)),
                         Text(
-                          DateFormat("yyyy-MM-dd")
+                          DateFormat("dd/MM/yyyy")
                               .format(DateTime.parse(tarefa.data)),
                         ),
                       ],

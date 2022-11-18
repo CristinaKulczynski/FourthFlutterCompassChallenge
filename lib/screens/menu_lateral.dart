@@ -50,6 +50,16 @@ class MenuLateral extends StatelessWidget {
               },
             ),
             const Divider(),
+            GestureDetector(
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                TelaTODOList.id,
+              ),
+              child: const ListTile(
+                leading: Icon(Icons.search),
+                title: Text('Pesquisa'),
+              ),
+            ),
+            const Divider(),
             BlocBuilder<BotaoBloc, BotaoState>(
               builder: (context, state) {
                 return Switch(
@@ -61,7 +71,7 @@ class MenuLateral extends StatelessWidget {
                   },
                 );
               },
-            )
+            ),
           ],
         ),
       ),
