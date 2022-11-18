@@ -53,7 +53,7 @@ class _AdicionarATarefaState extends State<AdicionarATarefa> {
             );
             if (calendarioData != null) {
               String formatoData =
-                  DateFormat("yyyy-MM-dd").format(calendarioData);
+                  DateFormat("dd/MM/yyyy").format(calendarioData);
               setState(() {
                 dataController.text = formatoData.toString();
               });
