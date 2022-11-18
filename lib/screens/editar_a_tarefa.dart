@@ -15,6 +15,8 @@ class EditarATarefa extends StatelessWidget {
         TextEditingController(text: todasTarefas.titulo);
     TextEditingController descricaoController =
         TextEditingController(text: todasTarefas.descricao);
+    TextEditingController dataController =
+        TextEditingController(text: todasTarefas.dataFinal);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(children: [
@@ -65,6 +67,7 @@ class EditarATarefa extends StatelessWidget {
                   isConcluida: false,
                   isFavorita: todasTarefas.isFavorita,
                   data: DateTime.now().toString(),
+                  dataFinal: dataController.text,
                 );
                 context.read<TarefasBloc>().add(EditarTarefa(
                       todasTarefas: todasTarefas,

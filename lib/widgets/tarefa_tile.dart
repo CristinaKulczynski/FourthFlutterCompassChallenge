@@ -65,8 +65,7 @@ class TarefaTile extends StatelessWidget {
                                   ? TextDecoration.lineThrough
                                   : null)),
                       Text(
-                        DateFormat()
-                            .add_yMMMd()
+                        DateFormat("yyyy-MM-dd")
                             .format(DateTime.parse(tarefa.data)),
                       ),
                     ],
