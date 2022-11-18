@@ -40,7 +40,7 @@ class TarefaTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -79,14 +79,13 @@ class TarefaTile extends StatelessWidget {
             children: [
               Checkbox(
                 value: tarefa.isConcluida,
-                onChanged:
-                    tarefa.isDeletada == false && tarefa.isConcluida == false
-                        ? (value) {
-                            context
-                                .read<TarefasBloc>()
-                                .add(AtualizarTarefa(tarefa: tarefa));
-                          }
-                        : null,
+                onChanged: tarefa.isDeletada == false
+                    ? (value) {
+                        context
+                            .read<TarefasBloc>()
+                            .add(AtualizarTarefa(tarefa: tarefa));
+                      }
+                    : null,
               ),
               BotaoPopUp(
                 tarefa: tarefa,

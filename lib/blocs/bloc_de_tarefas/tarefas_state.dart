@@ -14,8 +14,8 @@ class TarefasState extends Equatable {
 
   @override
   List<Object> get props => [
-        listaTarefasConcluidas,
         listaTarefasPendentes,
+        listaTarefasConcluidas,
         listaTarefasFavoritas,
         tarefasRemovidas
       ];

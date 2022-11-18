@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/models/tarefa.dart';
 
-class EditarATarefa extends StatefulWidget {
+class EditarATarefa extends StatelessWidget {
   final Tarefa todasTarefas;
   const EditarATarefa({
     Key? key,
@@ -10,16 +10,11 @@ class EditarATarefa extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<EditarATarefa> createState() => _EditarATarefaState();
-}
-
-class _EditarATarefaState extends State<EditarATarefa> {
-  @override
   Widget build(BuildContext context) {
     TextEditingController tituloController =
-        TextEditingController(text: widget.todasTarefas.titulo);
+        TextEditingController(text: todasTarefas.titulo);
     TextEditingController descricaoController =
-        TextEditingController(text: widget.todasTarefas.descricao);
+        TextEditingController(text: todasTarefas.descricao);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(children: [
@@ -66,13 +61,13 @@ class _EditarATarefaState extends State<EditarATarefa> {
                 var tarefaEditada = Tarefa(
                   titulo: tituloController.text,
                   descricao: descricaoController.text,
-                  id: widget.todasTarefas.id,
+                  id: todasTarefas.id,
                   isConcluida: false,
-                  isFavorita: widget.todasTarefas.isFavorita,
+                  isFavorita: todasTarefas.isFavorita,
                   data: DateTime.now().toString(),
                 );
                 context.read<TarefasBloc>().add(EditarTarefa(
-                      todasTarefas: widget.todasTarefas,
+                      todasTarefas: todasTarefas,
                       novaTarefa: tarefaEditada,
                     ));
                 Navigator.pop(context);

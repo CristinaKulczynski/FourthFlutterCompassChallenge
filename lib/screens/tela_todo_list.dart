@@ -5,7 +5,6 @@ import 'package:todolist/screens/favoritos.dart';
 import 'package:todolist/screens/menu_lateral.dart';
 import 'package:todolist/screens/pendencias.dart';
 
-
 class TelaTODOList extends StatefulWidget {
   const TelaTODOList({super.key});
   static const id = 'tela_todo_list';
@@ -29,8 +28,9 @@ class _TelaTODOListState extends State<TelaTODOList> {
       isScrollControlled: true,
       builder: (context) => SingleChildScrollView(
         child: Container(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
           child: const AdicionarATarefa(),
         ),
       ),

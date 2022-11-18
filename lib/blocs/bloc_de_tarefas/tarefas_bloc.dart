@@ -19,11 +19,12 @@ class TarefasBloc extends HydratedBloc<TarefasEvent, TarefasState> {
   void _onAdicionarTarefa(AdicionarTarefa event, Emitter<TarefasState> emit) {
     final state = this.state;
     emit(TarefasState(
-        listaTarefasPendentes: List.from(state.listaTarefasPendentes)
-          ..add(event.tarefa),
-        listaTarefasConcluidas: state.listaTarefasConcluidas,
-        listaTarefasFavoritas: state.listaTarefasFavoritas,
-        tarefasRemovidas: state.tarefasRemovidas));
+      listaTarefasPendentes: List.from(state.listaTarefasPendentes)
+        ..add(event.tarefa),
+      listaTarefasConcluidas: state.listaTarefasConcluidas,
+      listaTarefasFavoritas: state.listaTarefasFavoritas,
+      tarefasRemovidas: state.tarefasRemovidas,
+    ));
   }
 
   void _onAtualizarTarefa(AtualizarTarefa event, Emitter<TarefasState> emit) {

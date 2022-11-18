@@ -4,9 +4,7 @@ import 'package:todolist/models/tarefa.dart';
 import 'package:todolist/services/gerador_de_numeros.dart';
 
 class AdicionarATarefa extends StatelessWidget {
-  const AdicionarATarefa({
-    Key? key,
-  }) : super(key: key);
+  const AdicionarATarefa({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

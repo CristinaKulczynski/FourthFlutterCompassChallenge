@@ -6,6 +6,7 @@ import '../blocs/exportacao_do_bloc.dart';
 class Pendencias extends StatelessWidget {
   const Pendencias({Key? key}) : super(key: key);
   static const id = 'tela_todo_list';
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TarefasBloc, TarefasState>(
