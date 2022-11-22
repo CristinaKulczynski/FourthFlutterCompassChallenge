@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todolist/models/tarefa.dart';
 import 'package:todolist/widgets/lista_de_tarefas.dart';
 import '../blocs/exportacao_do_bloc.dart';
-import 'globals.dart' as globals;
+import '../services/globals.dart' as globals;
 
 class Favoritos extends StatelessWidget {
   const Favoritos({Key? key}) : super(key: key);
