@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/blocs/exportacao_do_bloc.dart';
 import 'package:todolist/screens/Reciclar.dart';
-// import 'package:todolist/screens/pesquisa.dart';
 import 'package:todolist/screens/tela_todo_list.dart';
 
 class MenuLateral extends StatelessWidget {
@@ -50,20 +49,6 @@ class MenuLateral extends StatelessWidget {
                 );
               },
             ),
-            // const Divider(),
-            // BlocBuilder<TarefasBloc, TarefasState>(
-            //   builder: (context, state) {
-            //     return GestureDetector(
-            //       onTap: () => Navigator.of(context).pushReplacementNamed(
-            //         Pesquisa.id,
-            //       ),
-            //       child: const ListTile(
-            //         leading: Icon(Icons.search),
-            //         title: Text('Pesquisa'),
-            //       ),
-            //     );
-            //   },
-            // ),
             const Divider(),
             BlocBuilder<BotaoBloc, BotaoState>(
               builder: (context, state) {
